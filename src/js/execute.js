@@ -1,6 +1,7 @@
-import React from 'react'
 import fetch from 'node-fetch'
 import { render } from 'react-dom'
+import React from 'react'
+import Frame from './frame.jsx'
 
 const fetchData = async (value) => {
   const HOST = 'http://localhost:5000'
@@ -12,7 +13,19 @@ const fetchData = async (value) => {
   return data
 }
 
-const generateFrame = () => {}
+const insertRoot = () => {
+  const node = window.document.createElement('div')
+
+  node.setAttribute('id', 'cherry-root')
+
+  window.document.body.appendChild(node)
+}
+
+const install = (data) => {
+  insertRoot()
+
+  render(<Frame {...data} />, document.getElementById('cherry-root'))
+}
 
 const execute = async (value) => {
   if (value === '') {
@@ -21,7 +34,9 @@ const execute = async (value) => {
 
   const data = await fetchData(value)
 
-  console.log(data)
+  if (data) {
+    install(data)
+  }
 }
 
-export default execute
+export { install, execute }

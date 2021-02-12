@@ -1,7 +1,8 @@
 import getSelection from './listener'
-import execute from './execute'
+import { execute, install } from './execute'
 
 const app = async () => {
+  install()
   getSelection((e) => execute(e.toString().trim()))
 }
 
