@@ -54,33 +54,100 @@ const NavContainer = styled.div`
   padding: 10px 0;
 `
 
-const ProfileContainer = styled.div``
+const PlayerPicture = styled.div``
 
-const BioContainer = styled.div``
+const PlayerDescription = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+`
 
-const StatsContainer = styled.div``
+const AthleteContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
-const StatsElement = styled.div``
+  > ${BioContainer} {
+    flex-grow: 1;
+  }
+`
+
+const BioContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`
+
+const StatsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+`
+
+const StatsElement = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+`
 
 const CloseButton = styled.div`
   background-color: ${TEAL};
   color: black;
-  font-size: 15px;
+  font-size: 12px;
   text-align: center;
   padding: 5px 20px;
   text-transform: uppercase;
   cursor: default;
   margin-right: 10px;
-  font-family: 'Mono';
+  font-family: Mono;
 `
+
+const StatsNumerical = styled.div`
+  color: ${TEAL};
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 16px;
+`
+
+const StatsType = styled.div`
+  color: white;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 12px;
+`
+
+const PlayerNameText = styled(StatsNumerical)``
+
+const PlayerRoleText = styled(StatsType)`
+  font-size: 14px;
+`
+
+const Navigation = () => (
+  <NavContainer>
+    <CloseButton>Close</CloseButton>
+  </NavContainer>
+)
+
+const StatsBlock = ({ type, value }) => (
+  <StatsElement>
+    <StatsNumerical>{value}</StatsNumerical>
+    <StatsType>{type}</StatsType>
+  </StatsElement>
+)
+
+const StatsCollection = ({ stats }) => (
+  <StatsContainer>
+    {Object.keys(stats).map((type, i) => (
+      <StatsBlock {...{ type, value: stats[type], key: i }} />
+    ))}
+  </StatsContainer>
+)
 
 const Frame = (data) => {
   return (
     <StyledDiv>
       <BackFrame>
-        <NavContainer>
-          <CloseButton>Close</CloseButton>
-        </NavContainer>
+        <Navigation />
       </BackFrame>
     </StyledDiv>
   )
