@@ -8,9 +8,12 @@ import { Spinner } from 'evergreen-ui'
 const ReactPlayerFrame = styled.div`
   > div {
     position: absolute !important;
-    bottom: -5px !important;
     width: auto !important;
-    height: auto !important;
+
+    video {
+      position: relative;
+      top: -12px;
+    }
   }
 `
 
@@ -43,6 +46,7 @@ const Clip = ({ plays: paramPlays, player_name: playerName }) => {
   const [videoUrl, setVideo] = useState(null)
   const [clip, setClip] = useState(0)
   const [isReady, setIsReady] = useState(true)
+  const [rendered, setRendered] = useState(false)
 
   const fetchNextPage = async () => {
     await fetch(`${HOST}?name=${playerName}&page=${page + 1}`)
@@ -50,6 +54,10 @@ const Clip = ({ plays: paramPlays, player_name: playerName }) => {
       .then(({ plays: plays_ }) => setPlays(filterPlays(plays_)))
       .then(() => setPage(page + 1))
   }
+
+  useEffect(() => {
+    setRendered(true)
+  }, [])
 
   useEffect(async () => {
     if (clip >= plays.length) {
@@ -66,7 +74,7 @@ const Clip = ({ plays: paramPlays, player_name: playerName }) => {
 
   return (
     <>
-      <ReactPlayerFrame>
+      <ReactPlayerFrame {...{ rendered }}>
         <ReactPlayer
           onEnded={() => {
             setClip(clip + 1)

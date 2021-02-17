@@ -1,7 +1,7 @@
 import fetch from 'node-fetch'
 import { render } from 'react-dom'
 import React from 'react'
-import Frame from './frame.jsx'
+import { Frame } from './frame.jsx'
 import BradleyBeal from '../fixtures/bradley_beal.json'
 
 const HOST = 'http://localhost:5000'

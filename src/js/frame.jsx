@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Clip from './clip'
+import { useSpring, animated } from 'react-spring'
 
 const TEAL = '#12FFD4'
 
@@ -33,18 +34,6 @@ const StyledDiv = styled.div`
   * {
     font-family: Mono !important;
   }
-`
-
-const BackFrame = styled.div`
-  background-color: black !important;
-  z-index: 99999999 !important;
-  display: flex;
-  flex-direction: column;
-  width: 600px;
-  height: 400px;
-  position: fixed !important;
-  bottom: 10px !important;
-  right: 10px !important;
 `
 
 const NavContainer = styled.div`
@@ -189,15 +178,47 @@ const Athlete = (data) => (
   </AthleteContainer>
 )
 
+const AnimationFrame = styled(({ className, children }) => {
+  const [isReady, setIsReady] = useState(false)
+
+  useEffect(() => {
+    setIsReady(true)
+  }, [])
+
+  const props = useSpring({
+    opacity: !isReady ? `0.9` : `1.0`,
+    height: !isReady ? `0px` : `500px`,
+  })
+
+  return (
+    <animated.div {...{ className, style: props }}>{children}</animated.div>
+  )
+})`
+  bottom: 0px;
+  position: fixed !important;
+  right: 10px !important;
+`
+
+const StyledAnimationFrame = styled(AnimationFrame)`
+  background-color: black !important;
+  z-index: 99999999 !important;
+  display: flex;
+  bottom: 0px;
+  flex-direction: column;
+  width: 600px;
+  position: fixed !important;
+  right: 10px !important;
+`
+
 const Frame = (data) => {
   return (
     <StyledDiv>
-      <BackFrame>
+      <StyledAnimationFrame>
         <Athlete {...data} />
         <Clip {...data} />
-      </BackFrame>
+      </StyledAnimationFrame>
     </StyledDiv>
   )
 }
 
-export default Frame
+export { Frame, AnimationFrame }
