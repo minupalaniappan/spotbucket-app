@@ -38,6 +38,7 @@ var options = {
   output: {
     path: path.join(__dirname, 'build'),
     filename: '[name].bundle.js',
+    chunkFilename: '[name].[chunkhash].js',
   },
   module: {
     rules: [

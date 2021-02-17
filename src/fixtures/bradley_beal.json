@@ -1,0 +1,89 @@
+{
+    "profile_image": "https://cdn.nba.com/headshots/nba/latest/1040x760/203078.png",
+    "nba_profile": "https://www.nba.com/player/203078/bradley-beal/",
+    "twitter_profile": "https://twitter.com/search?q=Bradley%20Beal&src=typed_query",
+    "player_name": "Bradley Beal",
+    "position": "Guard",
+    "team": "Washington Wizards",
+    "team_image": "https://cdn.nba.com/logos/nba/1610612764/primary/D/logo.svg",
+    "stats": {
+        "ppg": "32.8",
+        "apg": "4.5",
+        "rpg": "5.0"
+    },
+    "plays": [
+        {
+            "eventId": 19,
+            "shotDistance": 27,
+            "shotResult": "Missed",
+            "actionType": "Missed Shot",
+            "description": "MISS Beal 27' 3PT Jump Shot",
+            "gameId": "0022000382",
+            "videoUrl": {
+                "gameId": "0022000382",
+                "eventId": 19,
+                "videoUrl": "https://videos.nba.com/nba/pbp/media/2021/02/10/0022000382/19/fc19aa1a-c8e9-d409-ff77-d82cfd391a96_960x540.mp4"
+            }
+        },
+        {
+            "eventId": 21,
+            "shotDistance": 17,
+            "shotResult": "Missed",
+            "actionType": "Missed Shot",
+            "description": "MISS Beal 17' Jump Shot",
+            "gameId": "0022000382",
+            "videoUrl": {
+                "gameId": "0022000382",
+                "eventId": 21,
+                "videoUrl": "https://videos.nba.com/nba/pbp/media/2021/02/10/0022000382/21/b1235ac9-ad76-9661-a13d-13a5cadeaf2c_960x540.mp4"
+            }
+        },
+        {
+            "eventId": 44,
+            "shotDistance": 13,
+            "shotResult": "Made",
+            "actionType": "Made Shot",
+            "description": "Beal 13' Floating Jump Shot (2 PTS) (Westbrook 1 AST)",
+            "gameId": "0022000382",
+            "videoUrl": {
+                "gameId": "0022000382",
+                "eventId": 44,
+                "videoUrl": "https://videos.nba.com/nba/pbp/media/2021/02/10/0022000382/44/36337fa5-8f54-8d2b-8484-46eaab3b5ac2_960x540.mp4"
+            }
+        },
+        {
+            "eventId": 50,
+            "shotDistance": 0,
+            "shotResult": "",
+            "actionType": "Free Throw",
+            "description": "Beal Free Throw 1 of 2 (3 PTS)",
+            "gameId": "0022000382",
+            "videoUrl": {
+                "gameId": "0022000382",
+                "eventId": 50,
+                "videoUrl": "https://videos.nba.com/nba/pbp/media/2021/02/10/0022000382/50/f6663493-8182-7513-8d5d-34a3509394c7_960x540.mp4"
+            }
+        },
+        {
+            "eventId": 51,
+            "shotDistance": 0,
+            "shotResult": "",
+            "actionType": "Free Throw",
+            "description": "Beal Free Throw 2 of 2 (4 PTS)",
+            "gameId": "0022000382",
+            "videoUrl": {
+                "gameId": "0022000382",
+                "eventId": 51,
+                "videoUrl": "https://videos.nba.com/nba/pbp/media/2021/02/10/0022000382/51/9bf2d328-2c74-0f56-47cc-0f1601506a3a_960x540.mp4"
+            }
+        }
+    ],
+    "totalPlays": 36,
+    "totalPages": 8,
+    "hasNextPage": true,
+    "params": {
+        "game": 1,
+        "perPage": 5,
+        "page": 1
+    }
+}

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Clip from './clip'
 
 const TEAL = '#12FFD4'
 
@@ -36,14 +37,14 @@ const StyledDiv = styled.div`
 
 const BackFrame = styled.div`
   background-color: black !important;
-  position: absolute !important;
   z-index: 99999999 !important;
-  top: 10px !important;
-  right: 10px !important;
   display: flex;
   flex-direction: column;
   width: 600px;
   height: 400px;
+  position: fixed !important;
+  bottom: 10px !important;
+  right: 10px !important;
 `
 
 const NavContainer = styled.div`
@@ -54,27 +55,60 @@ const NavContainer = styled.div`
   padding: 10px 0;
 `
 
-const PlayerPicture = styled.div``
+const PlayerPicture = styled.div`
+  display: flex;
+  > div {
+    position: relative;
+    width: 150px;
+    height: 110px;
+
+    img {
+      position: absolute;
+    }
+
+    > img:first-child {
+      width: 150px;
+      z-index: 2;
+    }
+
+    > img:last-child {
+      width: 100px;
+      z-index: 1;
+      top: 15px;
+      left: -5px;
+      filter: blur(1px);
+    }
+  }
+`
 
 const PlayerDescription = styled.div`
   display: flex;
   flex-direction: column;
   padding-bottom: 20px;
+
+  > *:first-child {
+    padding-bottom: 5px;
+  }
+`
+
+const BioContainer = styled.div`
+  display: flex;
+  flex-direction: column;
 `
 
 const AthleteContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  padding: 10px;
+  padding-bottom: 0px;
+  gap: 30px;
+  z-index: 99;
+  background: black;
 
   > ${BioContainer} {
     flex-grow: 1;
   }
-`
-
-const BioContainer = styled.div`
-  display: flex;
-  flex-direction: row;
 `
 
 const StatsContainer = styled.div`
@@ -90,23 +124,12 @@ const StatsElement = styled.div`
   align-items: flex-end;
 `
 
-const CloseButton = styled.div`
-  background-color: ${TEAL};
-  color: black;
-  font-size: 12px;
-  text-align: center;
-  padding: 5px 20px;
-  text-transform: uppercase;
-  cursor: default;
-  margin-right: 10px;
-  font-family: Mono;
-`
-
 const StatsNumerical = styled.div`
   color: ${TEAL};
   font-weight: 700;
   text-transform: uppercase;
   font-size: 16px;
+  line-height: 16px;
 `
 
 const StatsType = styled.div`
@@ -114,6 +137,7 @@ const StatsType = styled.div`
   font-weight: 400;
   text-transform: uppercase;
   font-size: 12px;
+  line-height: 12px;
 `
 
 const PlayerNameText = styled(StatsNumerical)``
@@ -121,12 +145,6 @@ const PlayerNameText = styled(StatsNumerical)``
 const PlayerRoleText = styled(StatsType)`
   font-size: 14px;
 `
-
-const Navigation = () => (
-  <NavContainer>
-    <CloseButton>Close</CloseButton>
-  </NavContainer>
-)
 
 const StatsBlock = ({ type, value }) => (
   <StatsElement>
@@ -143,11 +161,40 @@ const StatsCollection = ({ stats }) => (
   </StatsContainer>
 )
 
+const AtheleteImage = ({ profile_image, team_image }) => (
+  <PlayerPicture>
+    <div>
+      <img src={profile_image} />
+      <img src={team_image} />
+    </div>
+  </PlayerPicture>
+)
+
+const AthleteDetails = ({ player_name, position, team, stats }) => (
+  <BioContainer>
+    <PlayerDescription>
+      <PlayerNameText>{player_name}</PlayerNameText>
+      <PlayerRoleText>
+        {position} for the {team}
+      </PlayerRoleText>
+    </PlayerDescription>
+    <StatsCollection {...{ stats }} />
+  </BioContainer>
+)
+
+const Athlete = (data) => (
+  <AthleteContainer>
+    <AtheleteImage {...data} />
+    <AthleteDetails {...data} />
+  </AthleteContainer>
+)
+
 const Frame = (data) => {
   return (
     <StyledDiv>
       <BackFrame>
-        <Navigation />
+        <Athlete {...data} />
+        <Clip {...data} />
       </BackFrame>
     </StyledDiv>
   )
