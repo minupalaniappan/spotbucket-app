@@ -1,7 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, {
+  useState,
+  useEffect,
+  useReducer,
+  createContext,
+  memo,
+} from 'react'
 import styled from 'styled-components'
 import Clip from './clip'
 import { useSpring, animated } from 'react-spring'
+import Controls from './controls'
 
 const TEAL = '#12FFD4'
 
@@ -132,7 +139,8 @@ const StatsType = styled.div`
 const PlayerNameText = styled(StatsNumerical)``
 
 const PlayerRoleText = styled(StatsType)`
-  font-size: 14px;
+  font-size: 12px;
+  max-width: 185px;
 `
 
 const StatsBlock = ({ type, value }) => (
@@ -159,7 +167,7 @@ const AtheleteImage = ({ profile_image, team_image }) => (
   </PlayerPicture>
 )
 
-const AthleteDetails = ({ player_name, position, team, stats }) => (
+const AthleteDetails = memo(({ player_name, position, team, stats }) => (
   <BioContainer>
     <PlayerDescription>
       <PlayerNameText>{player_name}</PlayerNameText>
@@ -169,12 +177,13 @@ const AthleteDetails = ({ player_name, position, team, stats }) => (
     </PlayerDescription>
     <StatsCollection {...{ stats }} />
   </BioContainer>
-)
+))
 
 const Athlete = (data) => (
   <AthleteContainer>
     <AtheleteImage {...data} />
     <AthleteDetails {...data} />
+    <Controls />
   </AthleteContainer>
 )
 
@@ -210,15 +219,45 @@ const StyledAnimationFrame = styled(AnimationFrame)`
   right: 10px !important;
 `
 
+const initialState = {
+  clipCurrent: 0,
+  clipTotal: 0,
+}
+
+const Store = createContext(initialState)
+
+const DataProvider = ({ children, Provider }) => {
+  const [state, dispatch] = useReducer((state, action) => {
+    switch (action.type) {
+      case 'updateClipProgress':
+        return Object.assign({}, state, {
+          clipCurrent: action.clipCurrent,
+        })
+      case 'updateClipTotal':
+        return Object.assign({}, state, {
+          clipTotal: action.clipTotal,
+        })
+      default:
+        return state
+    }
+  }, initialState)
+
+  return <Provider value={{ state, dispatch }}>{children}</Provider>
+}
+
 const Frame = (data) => {
+  const { Provider } = Store
+
   return (
-    <StyledDiv>
-      <StyledAnimationFrame>
-        <Athlete {...data} />
-        <Clip {...data} />
-      </StyledAnimationFrame>
-    </StyledDiv>
+    <DataProvider {...{ Provider }}>
+      <StyledDiv>
+        <StyledAnimationFrame>
+          <Athlete {...data} />
+          <Clip {...data} />
+        </StyledAnimationFrame>
+      </StyledDiv>
+    </DataProvider>
   )
 }
 
-export { Frame, AnimationFrame }
+export { Frame, AnimationFrame, Store }

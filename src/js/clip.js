@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import ReactPlayer from 'react-player'
 import fetch from 'node-fetch'
 import { HOST } from './execute'
+import { Store } from './frame'
 import styled from 'styled-components'
 import { Spinner } from 'evergreen-ui'
 
@@ -72,6 +73,8 @@ const Clip = ({ plays: paramPlays, player_name: playerName }) => {
     setVideo(videoUrl)
   }, [, clip])
 
+  const { dispatch } = useContext(Store)
+
   return (
     <>
       <ReactPlayerFrame {...{ rendered }}>
@@ -79,12 +82,30 @@ const Clip = ({ plays: paramPlays, player_name: playerName }) => {
           onEnded={() => {
             setClip(clip + 1)
             setIsReady(false)
+            dispatch({
+              type: 'updateClipProgress',
+              clipCurrent: 0,
+            })
+            dispatch({
+              type: 'updateClipTotal',
+              clipTotal: 0,
+            })
           }}
           url={videoUrl}
-          onStart={() => console.log('start')}
-          onReady={(e) => setIsReady(true)}
+          onReady={(e) => {
+            setIsReady(true)
+            dispatch({
+              type: 'updateClipTotal',
+              clipTotal: e.getDuration(),
+            })
+          }}
           onError={(e) => console.error(e)}
-          onProgress={(e) => {}}
+          onProgress={({ playedSeconds }) =>
+            dispatch({
+              type: 'updateClipProgress',
+              clipCurrent: playedSeconds,
+            })
+          }
           volume={1}
           muted
           playing
