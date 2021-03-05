@@ -1,11 +1,10 @@
 import getSelection from './listener'
 import { execute, install } from './execute'
 
-const app = async () => {
-  install()
+const app = () => {
   getSelection((e) => execute(e.toString().trim()))
 }
 
-window.addEventListener('load', async () => {
-  await app()
+window.addEventListener('load', () => {
+  app()
 })

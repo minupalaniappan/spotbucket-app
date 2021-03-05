@@ -25,8 +25,6 @@ const insertRoot = () => {
 const install = (data) => {
   insertRoot()
 
-  data = BradleyBeal
-
   render(<Frame {...data} />, document.getElementById('cherry-root'))
 }
 
