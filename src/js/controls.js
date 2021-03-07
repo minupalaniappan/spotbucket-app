@@ -3,8 +3,6 @@ import styled from 'styled-components'
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
 import { Store } from './frame'
-import AnimatedProgressProvider from './AnimatedProgressProvider'
-import { easeLinear } from 'd3-ease'
 
 const Progress = styled(({ className }) => {
   const {
@@ -15,32 +13,7 @@ const Progress = styled(({ className }) => {
     return null
   }
 
-  return (
-    <AnimatedProgressProvider
-      valueStart={0}
-      valueEnd={100}
-      duration={clipTotal}
-      easingFunction={easeLinear}
-    >
-      {(value) => {
-        return (
-          <CircularProgressbar
-            {...{
-              className,
-              value,
-              strokeWidth: 50,
-              styles: buildStyles({
-                strokeLinecap: 'butt',
-                trailColor: '#000',
-                pathColor: '#fff',
-                pathTransition: 'none',
-              }),
-            }}
-          />
-        )
-      }}
-    </AnimatedProgressProvider>
-  )
+  return <div />
 })`
   height: 25px;
   border: none;
