@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react'
 import ReactPlayer from 'react-player'
-import fetch from 'node-fetch'
-import { HOST } from './execute'
-import { Store } from './frame'
 import styled from 'styled-components'
 import { Spinner } from 'evergreen-ui'
+import { SPACING } from '../theme'
+import { StateStore } from '../Provider'
 
 const ReactPlayerFrame = styled.div`
   > div {
     position: absolute !important;
     width: auto !important;
+    margin-top: ${SPACING.small};
 
     video {
       position: relative;
@@ -28,7 +28,7 @@ const LoaderFrame = styled.div`
   > div {
     display: flex;
     position: relative;
-    bottom: 20px;
+    bottom: ${SPACING.medium};
 
     circle {
       stroke: white !important;
@@ -36,52 +36,29 @@ const LoaderFrame = styled.div`
   }
 `
 
-const Clip = ({ plays: paramPlays, player_name: playerName }) => {
-  const filterPlays = (events) =>
-    events.filter(({ videoUrl: { videoUrl } }) => videoUrl.length)
-
-  const [plays, setPlays] = useState(filterPlays(paramPlays))
-  const [page, setPage] = useState(1)
-  const [gameId, setGame] = useState(null)
-  const [eventId, setEventId] = useState(null)
-  const [videoUrl, setVideo] = useState(null)
-  const [clip, setClip] = useState(0)
-  const [isReady, setIsReady] = useState(true)
+const Clip = () => {
   const [rendered, setRendered] = useState(false)
-
-  const fetchNextPage = async () => {
-    await fetch(`${HOST}?name=${playerName}&page=${page + 1}`)
-      .then((e) => e.json())
-      .then(({ plays: plays_ }) => setPlays(filterPlays(plays_)))
-      .then(() => setPage(page + 1))
-  }
-
   useEffect(() => {
     setRendered(true)
   }, [])
 
-  useEffect(async () => {
-    if (clip >= plays.length) {
-      await fetchNextPage()
-      setClip(0)
-    }
-
-    const { eventId, gameId, videoUrl } = plays[clip].videoUrl
-
-    setGame(gameId)
-    setEventId(eventId)
-    setVideo(videoUrl)
-  }, [, clip])
-
-  const { dispatch } = useContext(Store)
+  const {
+    dispatch,
+    state: { muted, ready, plays, currentClip },
+  } = useContext(StateStore)
 
   return (
     <>
       <ReactPlayerFrame {...{ rendered }}>
         <ReactPlayer
           onEnded={() => {
-            setClip(clip + 1)
-            setIsReady(false)
+            dispatch({
+              type: 'nextClip',
+            })
+            dispatch({
+              type: 'setReady',
+              ready: false,
+            })
             dispatch({
               type: 'updateClipProgress',
               clipCurrent: 0,
@@ -91,27 +68,33 @@ const Clip = ({ plays: paramPlays, player_name: playerName }) => {
               clipTotal: 0,
             })
           }}
-          url={videoUrl}
+          url={plays[currentClip].videoUrl.videoUrl}
           onReady={(e) => {
-            setIsReady(true)
+            dispatch({
+              type: 'setReady',
+              ready: true,
+            })
             dispatch({
               type: 'updateClipTotal',
               clipTotal: e.getDuration(),
             })
           }}
-          onError={(e) => console.error(e)}
+          onError={(e) => {
+            dispatch({
+              type: 'setErrpr',
+              error: e,
+            })
+          }}
           onProgress={({ playedSeconds }) =>
             dispatch({
               type: 'updateClipProgress',
               clipCurrent: playedSeconds,
             })
           }
-          volume={1}
-          muted
-          playing
+          {...{ muted, playing: true, volume: 1 }}
         />
       </ReactPlayerFrame>
-      {!isReady ? (
+      {!ready ? (
         <LoaderFrame>
           <Spinner size={24} />
         </LoaderFrame>

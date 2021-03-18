@@ -23,6 +23,8 @@ const insertRoot = () => {
 }
 
 const install = (data) => {
+  data = BradleyBeal
+
   insertRoot()
 
   render(<Frame {...data} />, document.getElementById('cherry-root'))
@@ -33,7 +35,7 @@ const execute = async (value) => {
     return
   }
 
-  const data = await fetchData(value)
+  let data = await fetchData(value)
 
   if (data) {
     install(data)
