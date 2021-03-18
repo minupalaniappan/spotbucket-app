@@ -1,5 +1,6 @@
 import fetch from 'node-fetch'
 import React, { useReducer, createContext } from 'react'
+import copy from 'copy-to-clipboard'
 
 const initialState = {
   clipCurrent: 0,
@@ -11,6 +12,10 @@ const initialState = {
   playerName: '',
   plays: [],
   ready: false,
+  prevDisabled: true,
+  nextDisabled: true,
+  muteDisabled: true,
+  shareDisabled: true,
 }
 
 const HOST = 'http://localhost:5000'
@@ -59,13 +64,25 @@ export const DataProvider = ({ children, Provider }) => {
       case 'setReady':
         return Object.assign({}, state, {
           ready: action.ready,
+          prevDisabled: !action.ready || currentClip === 0,
+          nextDisabled: !action.ready,
+          muteDisabled: !action.ready,
+          shareDisabled: !action.ready,
         })
       case 'setPlays':
         return Object.assign({}, state, {
           plays: action.plays,
         })
-      case 'fetchPlays':
-        const plays = await fetch(
+      case 'nextPage':
+        let state = Object.assign({}, state, {
+          page: page + 1,
+          prevDisabled: true,
+          nextDisabled: true,
+          muteDisabled: true,
+          shareDisabled: true,
+        })
+
+        await fetch(
           `${HOST}?${new URLSearchParams({
             name: state.playerName,
             page: state.page,
@@ -79,6 +96,14 @@ export const DataProvider = ({ children, Provider }) => {
         return Object.assign({}, state, {
           plays,
         })
+      case 'shareClip':
+        copy(plays[currentClip].videoUrl.videoUrl)
+
+        return
+      case 'openLink':
+        window.open(plays[currentClip].videoUrl.videoUrl, '_blank')
+
+        return
       default:
         return state
     }
