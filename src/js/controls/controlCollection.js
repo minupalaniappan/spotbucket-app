@@ -1,23 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
 import { SPACING } from '../theme'
-import NextButton from './nextButton'
-import PrevButton from './prevButton'
+import Mute from './mute'
+import Share from './share'
 
 const Container = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   gap: ${SPACING.small};
 `
 
-const ToggleCollection = () => {
+const ControlCollection = () => {
   return (
     <Container>
-      <PrevButton />
-      <NextButton />
+      <Mute />
+      <Share />
     </Container>
   )
 }
 
-export default ToggleCollection
+export default ControlCollection
