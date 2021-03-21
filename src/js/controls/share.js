@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { useContext } from 'react'
 import styled from 'styled-components'
-import { StateStore } from '../Provider'
+import { StateStore } from '../Store'
 import { COLORS } from '../theme'
 
 const ShareText = styled.div`
@@ -16,8 +16,6 @@ const ShareText = styled.div`
 const ShareButton = styled.div`
   background: ${({ muted }) => (muted ? COLORS.grey : COLORS.green)};
   color: ${COLORS.white};
-  width: 50px;
-  padding: 5px 0;
   text-align: center;
   cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
   opacity: ${({ disabled }) => (disabled ? 0.9 : 1.0)};

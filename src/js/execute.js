@@ -14,6 +14,22 @@ const fetchData = async (value) => {
   return data
 }
 
+export const fetchNextPage = async ({ playerName, page }) => {
+  const nextPageData = await fetch(
+    `${HOST}?${new URLSearchParams({
+      name: playerName,
+      page: page,
+    })}`
+  )
+    .then((e) => e.json())
+    .then(({ plays: plays_, hasNextPage }) => ({
+      plays: plays_.filter(({ videoUrl: { videoUrl } }) => videoUrl.length > 0),
+      hasNextPage,
+    }))
+
+  return nextPageData
+}
+
 const insertRoot = () => {
   const node = window.document.createElement('div')
 

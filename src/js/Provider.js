@@ -1,115 +1,113 @@
-import fetch from 'node-fetch'
-import React, { useReducer, createContext } from 'react'
+import React, { useReducer } from 'react'
 import copy from 'copy-to-clipboard'
-
-const initialState = {
-  clipCurrent: 0,
-  clipTotal: 0,
-  currentClip: 0,
-  muted: false,
-  clipClosed: false,
-  page: 0,
-  playerName: '',
-  plays: [],
-  ready: false,
-  prevDisabled: true,
-  nextDisabled: true,
-  muteDisabled: true,
-  shareDisabled: true,
-}
-
-const HOST = 'http://localhost:5000'
-
-export const StateStore = createContext(initialState)
+import { initialState } from './Store'
 
 export const DataProvider = ({ children, Provider }) => {
-  const [state, dispatch] = useReducer(async (state, action) => {
+  const [state, dispatch] = useReducer((prevState, action) => {
+    const {
+      currentClip: _currentClip,
+      muted: _muted,
+      clipClosed: _clipClosed,
+      totalPages: _totalPages,
+      page: _page,
+      plays: _plays,
+    } = prevState
+
     switch (action.type) {
       case 'updateClipProgress':
-        return Object.assign({}, state, {
+        return Object.assign({}, prevState, {
           clipCurrent: action.clipCurrent,
         })
       case 'updateClipTotal':
-        return Object.assign({}, state, {
+        return Object.assign({}, prevState, {
           clipTotal: action.clipTotal,
         })
       case 'nextClip':
-        return Object.assign({}, state, {
-          currentClip: currentClip + 1,
+        return Object.assign({}, prevState, {
+          currentClip: _currentClip + 1,
         })
       case 'prevClip':
-        return Object.assign({}, state, {
-          currentClip: currentClip - 1,
+        return Object.assign({}, prevState, {
+          currentClip: _currentClip - 1,
         })
       case 'muteClip':
-        return Object.assign({}, state, {
-          muted: !state.muted,
+        return Object.assign({}, prevState, {
+          muted: !_muted,
         })
       case 'closeClip':
-        return Object.assign({}, state, {
-          clipClosed: !state.clipClosed,
-        })
-      case 'setPage':
-        return Object.assign({}, state, {
-          page: action.page,
-        })
-      case 'setPlayer':
-        return Object.assign({}, state, {
-          player: action.player,
+        return Object.assign({}, prevState, {
+          clipClosed: !_clipClosed,
         })
       case 'setError':
-        return Object.assign({}, state, {
+        return Object.assign({}, prevState, {
           error: action.error,
         })
       case 'setReady':
-        return Object.assign({}, state, {
+        return Object.assign({}, prevState, {
           ready: action.ready,
-          prevDisabled: !action.ready || currentClip === 0,
+          prevDisabled: !action.ready || _currentClip === 0,
           nextDisabled: !action.ready,
           muteDisabled: !action.ready,
           shareDisabled: !action.ready,
         })
       case 'setPlays':
-        return Object.assign({}, state, {
+        return Object.assign({}, prevState, {
           plays: action.plays,
         })
       case 'nextPage':
-        let state = Object.assign({}, state, {
-          page: page + 1,
+        prevState = Object.assign({}, prevState, {
           prevDisabled: true,
           nextDisabled: true,
           muteDisabled: true,
           shareDisabled: true,
         })
 
-        await fetch(
-          `${HOST}?${new URLSearchParams({
-            name: state.playerName,
-            page: state.page,
-          })}`
-        )
-          .then((e) => e.json())
-          .then(({ plays }) =>
-            plays.filter(({ videoUrl: { videoUrl } }) => videoUrl.length > 0)
-          )
+        let nextPageNumber
+        if (page + 1 > _totalPages) {
+          nextPageNumber = 0
+        } else {
+          nextPageNumber = _page + 1
+        }
 
-        return Object.assign({}, state, {
-          plays,
+        return Object.assign({}, prevState, {
+          page: nextPageNumber,
         })
       case 'shareClip':
-        copy(plays[currentClip].videoUrl.videoUrl)
+        copy(_plays[_currentClip].videoUrl.videoUrl)
 
         return
       case 'openLink':
-        window.open(plays[currentClip].videoUrl.videoUrl, '_blank')
+        window.open(_plays[_currentClip].videoUrl.videoUrl, '_blank')
 
         return
+      case 'mountData':
+        return Object.assign({}, prevState, {
+          hasNextPage: action.hasNextPage,
+          totalPages: action.totalPages,
+          params: action.params,
+          totalPlays: action.totalPlays,
+          playerName: action.player_name,
+          player: {
+            nbaProfile: action.nba_profile,
+            twitterProfile: action.twitter_profile,
+            position: action.position,
+            playerImage: action.profile_image,
+            playerTeamImage: action.team_image,
+            team: action.team,
+            stats: {
+              playerPPG: action.stats.ppg,
+              playerAPG: action.stats.apg,
+              playerRPG: action.stats.rpg,
+            },
+          },
+          plays: action.plays.filter(
+            ({ videoUrl: { videoUrl } }) => videoUrl.length > 0
+          ),
+        })
       default:
-        return state
+        return prevState
     }
   }, initialState)
-
-  events.filter(({ videoUrl: { videoUrl } }) => videoUrl.length)
 
   return <Provider value={{ state, dispatch }}>{children}</Provider>
 }

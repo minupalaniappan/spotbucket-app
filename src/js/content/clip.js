@@ -2,18 +2,15 @@ import React, { useState, useEffect, useContext } from 'react'
 import ReactPlayer from 'react-player'
 import styled from 'styled-components'
 import { Spinner } from 'evergreen-ui'
-import { SPACING } from '../theme'
-import { StateStore } from '../Provider'
+import { StateStore } from '../Store'
 
 const ReactPlayerFrame = styled.div`
   > div {
     position: absolute !important;
     width: auto !important;
-    margin-top: ${SPACING.small};
 
     video {
       position: relative;
-      top: -12px;
     }
   }
 `
@@ -28,7 +25,6 @@ const LoaderFrame = styled.div`
   > div {
     display: flex;
     position: relative;
-    bottom: ${SPACING.medium};
 
     circle {
       stroke: white !important;
@@ -37,19 +33,18 @@ const LoaderFrame = styled.div`
 `
 
 const Clip = () => {
-  const [rendered, setRendered] = useState(false)
-  useEffect(() => {
-    setRendered(true)
-  }, [])
-
   const {
     dispatch,
-    state: { muted, ready, plays, currentClip },
+    state: { muted, ready, plays = [], currentClip },
   } = useContext(StateStore)
+
+  if (plays.length === 0) {
+    return null
+  }
 
   return (
     <>
-      <ReactPlayerFrame {...{ rendered }}>
+      <ReactPlayerFrame>
         <ReactPlayer
           onEnded={() => {
             dispatch({

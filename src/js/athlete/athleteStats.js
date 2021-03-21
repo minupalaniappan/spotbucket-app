@@ -1,8 +1,8 @@
 import React from 'react'
 import { useContext } from 'react'
 import styled, { css } from 'styled-components'
-import { StateStore } from '../Provider'
-import { COLORS, FONT_SIZES, SPACING } from '../theme'
+import { StateStore } from '../Store'
+import { COLORS, FONT_SIZES } from '../theme'
 
 const BaseFontStyle = css`
   font-weight: bold;
@@ -38,7 +38,6 @@ const Row = styled.div`
 
 const Cell = styled.div`
   width: 50px;
-  padding: ${SPACING.small} 0;
 `
 
 const HeaderCell = styled(Cell)`
@@ -49,7 +48,9 @@ const STATS = ['PPG', 'APG', 'RPG', 'SPG', 'BPG', '3PM', 'FG', 'FT']
 
 const AthleteStats = () => {
   const {
-    state: { player },
+    state: {
+      player: { stats },
+    },
   } = useContext(StateStore)
 
   return (
@@ -64,7 +65,7 @@ const AthleteStats = () => {
       <Row>
         {STATS.map((s, i) => (
           <Cell key={`${s}_${i}`}>
-            <StatValue>{player[`player${s}`]}</StatValue>
+            <StatValue>{stats[`player${s}`]}</StatValue>
           </Cell>
         ))}
       </Row>

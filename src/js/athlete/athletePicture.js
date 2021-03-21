@@ -1,29 +1,24 @@
 import React from 'react'
 import { useContext } from 'react'
 import styled from 'styled-components'
-import { StateStore } from '../Provider'
+import { StateStore } from '../Store'
 
 const PlayerPicture = styled.div`
   display: flex;
   > div {
     position: relative;
-    width: 150px;
-    height: 110px;
 
     img {
       position: absolute;
     }
 
     > img:first-child {
-      width: 150px;
       z-index: 2;
     }
 
     > img:last-child {
       width: 100px;
       z-index: 1;
-      top: 15px;
-      left: -5px;
       filter: blur(1px);
     }
   }

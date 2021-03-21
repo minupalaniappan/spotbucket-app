@@ -1,7 +1,7 @@
 import React from 'react'
 import ToggleButton from './toggleButton'
 import { useContext } from 'react'
-import { StateStore } from '../Provider'
+import { StateStore } from '../Store'
 
 const NextButton = () => {
   const {

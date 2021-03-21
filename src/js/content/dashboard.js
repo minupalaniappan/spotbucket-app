@@ -7,42 +7,40 @@ import ProgressBar from '../content/progress'
 import ControlCollection from '../controls/controlCollection'
 import ToggleCollection from '../controls/toggleCollection'
 import AthleteStats from '../athlete/athleteStats'
-
-const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
-const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-`
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 const Dashboard = () => {
   return (
-    <Column>
-      <Toolbar />
+    <Container>
       <Row>
-        <Column>
+        <Col xs={10} />
+        <Col xs={2}>
+          <Toolbar />
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={4}>
           <AthletePicture />
-        </Column>
-        <Column>
+        </Col>
+        <Col xs={6}>
           <AthleteDescription />
           <Row>
-            <Column>
+            <Col xs={11}>
               <AthleteStats />
               <ProgressBar />
-            </Column>
-            <Column>
+            </Col>
+            <Col xs={1}>
               <ControlCollection />
-            </Column>
+            </Col>
           </Row>
-        </Column>
-        <Column>
+        </Col>
+        <Col xs={2}>
           <ToggleCollection />
-        </Column>
+        </Col>
       </Row>
-    </Column>
+    </Container>
   )
 }
 

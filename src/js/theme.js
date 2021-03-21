@@ -17,9 +17,10 @@ export const FONT_SIZES = {
   large: '24px',
 }
 
-export const SPACING = {
-  small: '10px',
-  medium: '20px',
+export const WIDTHS = {
+  small: '20px',
+  medium: '50px',
+  large: '100px',
 }
 
 export const FontProvider = styled.div`

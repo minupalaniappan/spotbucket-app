@@ -2,7 +2,7 @@ import React from 'react'
 import { useContext } from 'react'
 import styled from 'styled-components'
 import CloseButton from '../../img/CloseButton'
-import { StateStore } from '../Provider'
+import { StateStore } from '../Store'
 
 const Close = styled(({ className, disabled = false }) => {
   const { dispatch } = useContext(StateStore)

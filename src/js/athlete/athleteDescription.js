@@ -1,13 +1,12 @@
 import React from 'react'
 import { useContext } from 'react'
 import styled from 'styled-components'
-import { StateStore } from '../Provider'
-import { FONT_SIZES, SPACING } from '../theme'
+import { StateStore } from '../Store'
+import { FONT_SIZES } from '../theme'
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${SPACING.small};
 `
 
 const PlayerName = styled.div`

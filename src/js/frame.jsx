@@ -3,7 +3,9 @@ import styled from 'styled-components'
 import Clip from './content/clip'
 import { useSpring, animated } from 'react-spring'
 import { COLORS, FontProvider } from './theme'
-import { DataProvider, StateStore } from './Provider'
+import { DataProvider } from './Provider'
+import { StateStore } from './Store'
+import Mount from './mount'
 
 const AnimationFrame = styled(({ className, children }) => {
   const [isReady, setIsReady] = useState(false)
@@ -42,13 +44,15 @@ const Frame = (data) => {
 
   return (
     <DataProvider {...{ Provider }}>
-      <FontProvider>
-        <StyledAnimationFrame>
-          <Clip {...data} />
-        </StyledAnimationFrame>
-      </FontProvider>
+      <Mount {...{ data }}>
+        <FontProvider>
+          <StyledAnimationFrame>
+            <Clip />
+          </StyledAnimationFrame>
+        </FontProvider>
+      </Mount>
     </DataProvider>
   )
 }
 
-export { Frame, AnimationFrame, Store }
+export { Frame, AnimationFrame }

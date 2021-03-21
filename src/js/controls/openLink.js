@@ -1,7 +1,7 @@
 import React from 'react'
 import { useContext } from 'react'
 import styled from 'styled-components'
-import { StateStore } from '../Provider'
+import { StateStore } from '../Store'
 
 const OpenLink = styled(({ className, disabled = false }) => {
   const { dispatch } = useContext(StateStore)
