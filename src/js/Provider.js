@@ -22,6 +22,13 @@ export const DataProvider = ({ children, Provider }) => {
         return Object.assign({}, prevState, {
           clipTotal: action.clipTotal,
         })
+      case 'setPage':
+        return Object.assign({}, prevState, {
+          page: action.page,
+          currentClip: 0,
+          plays: action.plays,
+          hasNextPage: action.hasNextPage,
+        })
       case 'nextClip':
         return Object.assign({}, prevState, {
           currentClip: _currentClip + 1,

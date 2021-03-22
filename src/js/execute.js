@@ -6,7 +6,7 @@ import BradleyBeal from '../fixtures/bradley_beal.json'
 
 const HOST = 'http://localhost:5000'
 
-const fetchData = async (value) => {
+export const fetchData = async (value) => {
   const data = await fetch(`${HOST}?name=${value}`)
     .then((d) => d.json())
     .then((e) => e)

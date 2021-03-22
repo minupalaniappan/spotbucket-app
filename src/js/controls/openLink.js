@@ -2,6 +2,7 @@ import React from 'react'
 import { useContext } from 'react'
 import styled from 'styled-components'
 import { StateStore } from '../Store'
+import LinkButton from './LinkButton'
 
 const OpenLink = styled(({ className, disabled = false }) => {
   const { dispatch } = useContext(StateStore)

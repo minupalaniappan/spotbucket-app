@@ -3,7 +3,7 @@ import { createContext } from 'react'
 export const initialState = {
   clipCurrent: 0,
   clipTotal: 0,
-  currentClip: 0,
+  currentClip: 4,
   muted: true,
   clipClosed: false,
   page: 0,

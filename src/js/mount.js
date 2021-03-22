@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { StateStore } from './Store'
 import { useContext } from 'react'
 

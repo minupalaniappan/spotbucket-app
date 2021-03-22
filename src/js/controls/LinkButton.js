@@ -1,4 +1,6 @@
-export default (
+import React from 'react'
+
+const LinkButton = () => (
   <svg
     width='18'
     height='18'
@@ -6,20 +8,20 @@ export default (
     fill='none'
     xmlns='http://www.w3.org/2000/svg'
   >
-    <g clip-path='url(#clip0)'>
+    <g clipPath='url(#clip0)'>
       <path
         d='M5.25 12.75L12.75 5.25'
         stroke='#FFF7F7'
-        stroke-width='2'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
       <path
         d='M5.25 5.25H12.75V12.75'
         stroke='#FFF7F7'
-        stroke-width='2'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
     </g>
     <defs>
@@ -29,3 +31,5 @@ export default (
     </defs>
   </svg>
 )
+
+export default LinkButton

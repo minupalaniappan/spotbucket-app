@@ -6,6 +6,7 @@ import { COLORS, FontProvider } from './theme'
 import { DataProvider } from './Provider'
 import { StateStore } from './Store'
 import Mount from './mount'
+import Dashboard from './content/dashboard'
 
 const AnimationFrame = styled(({ className, children }) => {
   const [isReady, setIsReady] = useState(false)
@@ -47,6 +48,7 @@ const Frame = (data) => {
       <Mount {...{ data }}>
         <FontProvider>
           <StyledAnimationFrame>
+            <Dashboard />
             <Clip />
           </StyledAnimationFrame>
         </FontProvider>

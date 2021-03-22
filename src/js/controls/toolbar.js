@@ -1,6 +1,7 @@
 import React from 'react'
 import Close from './close'
 import OpenLink from './openLink'
+import styled from 'styled-components'
 
 const Container = styled.div`
   display: flex;

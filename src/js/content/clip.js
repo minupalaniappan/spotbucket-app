@@ -3,6 +3,7 @@ import ReactPlayer from 'react-player'
 import styled from 'styled-components'
 import { Spinner } from 'evergreen-ui'
 import { StateStore } from '../Store'
+import { fetchNextPage } from '../execute'
 
 const ReactPlayerFrame = styled.div`
   > div {
@@ -35,21 +36,56 @@ const LoaderFrame = styled.div`
 const Clip = () => {
   const {
     dispatch,
-    state: { muted, ready, plays = [], currentClip },
+    state: {
+      muted,
+      ready,
+      plays = [],
+      currentClip,
+      totalPages,
+      page,
+      playerName,
+    },
   } = useContext(StateStore)
 
   if (plays.length === 0) {
     return null
   }
 
+  const endOfPage = currentClip + 1 === plays.length
+  const endOfPages = page + 1 === totalPages
+
   return (
     <>
       <ReactPlayerFrame>
         <ReactPlayer
-          onEnded={() => {
-            dispatch({
-              type: 'nextClip',
-            })
+          onEnded={async () => {
+            if (endOfPage) {
+              if (endOfPages) {
+                const plays = await fetchNextPage({ playerName, page: 0 })
+
+                dispatch({
+                  type: 'setPage',
+                  page: 0,
+                  ...plays,
+                })
+              } else {
+                const plays = await fetchNextPage({
+                  playerName,
+                  page: page + 1,
+                })
+
+                dispatch({
+                  type: 'setPage',
+                  page: page + 1,
+                  ...plays,
+                })
+              }
+            } else {
+              dispatch({
+                type: 'nextClip',
+              })
+            }
+
             dispatch({
               type: 'setReady',
               ready: false,

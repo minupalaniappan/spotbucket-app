@@ -15,7 +15,8 @@ const ProgressElement = styled.div`
     z-index: 1;
     left: 0;
     top: 0;
-    width: ${(clipCurrent / clipTotal) * 100}%;
+    ${({ clipCurrent, clipTotal }) =>
+      `width: ${(clipCurrent / clipTotal) * 100}%;`}
   }
 `
 

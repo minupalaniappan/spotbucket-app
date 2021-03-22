@@ -1,4 +1,6 @@
-export default (
+import React from 'react'
+
+const CloseButton = () => (
   <svg
     width='16'
     height='16'
@@ -9,16 +11,18 @@ export default (
     <path
       d='M12 4L4 12'
       stroke='#FFF7F7'
-      stroke-width='2'
-      stroke-linecap='round'
-      stroke-linejoin='round'
+      strokeWidth='2'
+      strokeLinecap='round'
+      strokeLinejoin='round'
     />
     <path
       d='M4 4L12 12'
       stroke='#FFF7F7'
-      stroke-width='2'
-      stroke-linecap='round'
-      stroke-linejoin='round'
+      strokeWidth='2'
+      strokeLinecap='round'
+      strokeLinejoin='round'
     />
   </svg>
 )
+
+export default CloseButton
