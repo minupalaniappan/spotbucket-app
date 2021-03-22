@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useContext } from 'react'
 import styled, { css } from 'styled-components'
 import { StateStore } from '../Store'
@@ -47,11 +47,13 @@ const HeaderCell = styled(Cell)`
 const STATS = ['PPG', 'APG', 'RPG', 'SPG', 'BPG', '3PM', 'FG', 'FT']
 
 const AthleteStats = () => {
+  const { state } = useContext(StateStore)
+
+  return null
+
   const {
-    state: {
-      player: { stats },
-    },
-  } = useContext(StateStore)
+    player: { stats },
+  } = state
 
   return (
     <Container>

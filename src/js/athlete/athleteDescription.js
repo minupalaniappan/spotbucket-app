@@ -1,5 +1,5 @@
 import React from 'react'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import styled from 'styled-components'
 import { StateStore } from '../Store'
 import { FONT_SIZES } from '../theme'
@@ -22,10 +22,22 @@ const PlayerDescription = styled.div`
 
 const AthleteDescription = () => {
   const {
-    state: {
-      player: { playerName, playerNumber, playerPosition, playerTeam },
-    },
+    state: { player },
   } = useContext(StateStore)
+
+  if (!player) {
+    return null
+  }
+
+  return null
+
+  if (state === undefined) {
+    return null
+  }
+
+  const {
+    player: { playerName, playerNumber, playerPosition, playerTeam },
+  } = state
 
   return (
     <Container>

@@ -22,6 +22,8 @@ const ShareButton = styled.div`
 `
 
 const Share = () => {
+  return null
+
   const {
     dispatch,
     state: { shareDisabled },

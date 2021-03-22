@@ -20,6 +20,8 @@ const MuteButton = styled.div`
 `
 
 const Mute = () => {
+  return null
+
   const {
     dispatch,
     state: { muted, muteDisabled },

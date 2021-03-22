@@ -19,7 +19,7 @@ const ToggleContainer = styled.div`
 
 const ToggleButton = ({ onClick, disabled = false, toggleDirection }) => {
   return (
-    <ToggleContainer {...{ disabled, onClick: disabled ? '' : onClick }}>
+    <ToggleContainer {...{ disabled, onClick: disabled ? null : onClick }}>
       <Text>{toggleDirection}</Text>
     </ToggleContainer>
   )

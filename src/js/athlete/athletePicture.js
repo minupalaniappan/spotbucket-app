@@ -25,11 +25,9 @@ const PlayerPicture = styled.div`
 `
 
 const AthletePicture = () => {
-  const {
-    state: {
-      player: { playerImage, playerTeamImage },
-    },
-  } = useContext(StateStore)
+  const { state } = useContext(StateStore)
+
+  return null
 
   return (
     <PlayerPicture>
