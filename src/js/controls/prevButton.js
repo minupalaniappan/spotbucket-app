@@ -4,10 +4,13 @@ import { useContext } from 'react'
 import { StateStore } from '../Store'
 
 const PrevButton = () => {
-  const {
-    dispatch,
-    state: { prevDisabled },
-  } = useContext(StateStore)
+  const { dispatch, state } = useContext(StateStore)
+
+  if (!state) {
+    return null
+  }
+
+  const { prevDisabled } = state
 
   return (
     <ToggleButton

@@ -20,12 +20,13 @@ const MuteButton = styled.div`
 `
 
 const Mute = () => {
-  return null
+  const { dispatch, state } = useContext(StateStore)
 
-  const {
-    dispatch,
-    state: { muted, muteDisabled },
-  } = useContext(StateStore)
+  if (!state) {
+    return null
+  }
+
+  const { muted, muteDisabled } = state
 
   const onClick = () => {
     dispatch({
@@ -38,7 +39,7 @@ const Mute = () => {
       {...{
         muted,
         disabled: muteDisabled,
-        onClick: muteDisabled ? '' : onClick,
+        onClick: muteDisabled ? null : onClick,
       }}
     >
       <MuteText>{muted ? 'Unmute' : 'Mute'}</MuteText>

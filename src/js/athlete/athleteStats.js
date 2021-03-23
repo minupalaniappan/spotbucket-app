@@ -49,7 +49,9 @@ const STATS = ['PPG', 'APG', 'RPG', 'SPG', 'BPG', '3PM', 'FG', 'FT']
 const AthleteStats = () => {
   const { state } = useContext(StateStore)
 
-  return null
+  if (!state || !state.player) {
+    return null
+  }
 
   const {
     player: { stats },

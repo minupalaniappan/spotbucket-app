@@ -21,17 +21,9 @@ const PlayerDescription = styled.div`
 `
 
 const AthleteDescription = () => {
-  const {
-    state: { player },
-  } = useContext(StateStore)
+  const { state } = useContext(StateStore)
 
-  if (!player) {
-    return null
-  }
-
-  return null
-
-  if (state === undefined) {
+  if (!state || !state.player) {
     return null
   }
 

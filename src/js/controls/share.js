@@ -14,7 +14,7 @@ const ShareText = styled.div`
 `
 
 const ShareButton = styled.div`
-  background: ${({ muted }) => (muted ? COLORS.grey : COLORS.green)};
+  background: ${({ disabled }) => (disabled ? COLORS.grey : COLORS.green)};
   color: ${COLORS.white};
   text-align: center;
   cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
@@ -22,12 +22,13 @@ const ShareButton = styled.div`
 `
 
 const Share = () => {
-  return null
+  const { dispatch, state } = useContext(StateStore)
 
-  const {
-    dispatch,
-    state: { shareDisabled },
-  } = useContext(StateStore)
+  if (!state) {
+    return null
+  }
+
+  const { shareDisabled } = state
 
   const [clicked, setClicked] = useState(false)
   const [disabled_, setDisabled] = useState(shareDisabled)
@@ -51,7 +52,7 @@ const Share = () => {
   }, [clicked])
 
   return (
-    <ShareButton {...{ muted, disabled, onClick: disabled_ ? '' : onClick }}>
+    <ShareButton {...{ disabled_, onClick: disabled_ ? null : onClick }}>
       <ShareText>{clicked ? 'Copied!' : 'Copy Link'}</ShareText>
     </ShareButton>
   )

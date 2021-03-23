@@ -4,10 +4,13 @@ import { useContext } from 'react'
 import { StateStore } from '../Store'
 
 const NextButton = () => {
-  const {
-    dispatch,
-    state: { nextDisabled, currentClip, plays },
-  } = useContext(StateStore)
+  const { dispatch, state } = useContext(StateStore)
+
+  if (!state) {
+    return null
+  }
+
+  const { nextDisabled, currentClip, plays } = state
 
   let type
   if (currentClip + 1 === plays.length) {

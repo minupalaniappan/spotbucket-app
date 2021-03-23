@@ -13,7 +13,7 @@ const OpenLink = styled(({ className, disabled = false }) => {
     })
   }
 
-  return <LinkButton {...{ className, onClick: disabled ? '' : onClick }} />
+  return <LinkButton {...{ className, onClick: disabled ? null : onClick }} />
 })`
   cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
 `
