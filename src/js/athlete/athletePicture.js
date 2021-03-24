@@ -2,11 +2,14 @@ import React from 'react'
 import { useContext } from 'react'
 import styled from 'styled-components'
 import { StateStore } from '../Store'
+import { WIDTHS } from '../theme'
 
 const PlayerPicture = styled.div`
   display: flex;
   > div {
     position: relative;
+    width: 150px;
+    height: 110px;
 
     img {
       position: absolute;
@@ -14,9 +17,11 @@ const PlayerPicture = styled.div`
 
     > img:first-child {
       z-index: 2;
+      width: 150px;
     }
 
     > img:last-child {
+      top: ${WIDTHS.small};
       width: 100px;
       z-index: 1;
       filter: blur(1px);
