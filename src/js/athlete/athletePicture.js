@@ -6,6 +6,9 @@ import { WIDTHS } from '../theme'
 
 const PlayerPicture = styled.div`
   display: flex;
+  position: relative;
+  top: 3px;
+
   > div {
     position: relative;
     width: 150px;

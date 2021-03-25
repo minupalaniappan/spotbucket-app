@@ -15,6 +15,7 @@ const ToggleContainer = styled.div`
   text-align: center;
   cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
   opacity: ${({ disabled }) => (disabled ? 0.9 : 1.0)};
+  flex-grow: 1;
 `
 
 const ToggleButton = ({ onClick, disabled = false, toggleDirection }) => {

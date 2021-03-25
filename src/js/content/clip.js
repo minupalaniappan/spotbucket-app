@@ -6,9 +6,12 @@ import { StateStore } from '../Store'
 import { fetchNextPage } from '../execute'
 
 const ReactPlayerFrame = styled.div`
+  position: relative;
+
   > div {
     position: absolute !important;
     width: auto !important;
+    top: -8px;
 
     video {
       position: relative;

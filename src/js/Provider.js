@@ -93,14 +93,14 @@ export const DataProvider = ({ children, Provider }) => {
           totalPages: action.totalPages,
           params: action.params,
           totalPlays: action.totalPlays,
-          playerName: action.player_name,
           player: {
             nbaProfile: action.nba_profile,
             twitterProfile: action.twitter_profile,
-            position: action.position,
+            playerPosition: action.position,
             playerImage: action.profile_image,
             playerTeamImage: action.team_image,
-            team: action.team,
+            playerName: action.player_name,
+            playerTeam: action.team,
             stats: {
               playerPPG: action.stats.ppg,
               playerAPG: action.stats.apg,

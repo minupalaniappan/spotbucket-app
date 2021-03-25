@@ -8,6 +8,8 @@ const ProgressElement = styled.div`
   width: 100%;
   background: ${COLORS.brown};
   position: relative;
+  height: 5px;
+  margin-top: 5px;
 
   > div {
     position: absolute;
@@ -15,8 +17,9 @@ const ProgressElement = styled.div`
     z-index: 1;
     left: 0;
     top: 0;
-    ${({ clipCurrent, clipTotal }) =>
+    ${({ clipCurrent = 0, clipTotal = 100 }) =>
       `width: ${(clipCurrent / clipTotal) * 100}%;`}
+    height: 10px;
   }
 `
 

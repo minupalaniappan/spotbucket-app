@@ -7,36 +7,44 @@ import ProgressBar from '../content/progress'
 import ControlCollection from '../controls/controlCollection'
 import ToggleCollection from '../controls/toggleCollection'
 import AthleteStats from '../athlete/athleteStats'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+`
+
+const Col = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  ${({ grow }) => (grow ? 'flex-grow: 1;' : '')};
+  ${({ top }) => (top ? 'align-items: flex-start' : '')};
+`
 
 const Dashboard = () => {
   return (
     <Container>
+      <Toolbar />
       <Row>
-        <Col xs={10} />
-        <Col xs={2}>
-          <Toolbar />
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={4}>
+        <Col>
           <AthletePicture />
         </Col>
-        <Col xs={6}>
+        <Col>
           <AthleteDescription />
           <Row>
-            <Col xs={11}>
+            <Col grow>
               <AthleteStats />
               <ProgressBar />
             </Col>
-            <Col xs={1}>
-              <ControlCollection />
-            </Col>
           </Row>
         </Col>
-        <Col xs={2}>
+        <Col grow>
           <ToggleCollection />
         </Col>
       </Row>

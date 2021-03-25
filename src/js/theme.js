@@ -1,4 +1,6 @@
+import GoogleFontLoader from 'react-google-font-loader'
 import styled from 'styled-components'
+import React from 'react'
 
 export const COLORS = {
   black: '#000000',
@@ -23,33 +25,22 @@ export const WIDTHS = {
   large: '100px',
 }
 
-export const FontProvider = styled.div`
-  @font-face {
-    font-family: Mono;
-    src: url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
-    font-weight: 400;
-  }
-
-  @font-face {
-    font-family: Mono;
-    src: url('https://fonts.googleapis.com/css2?family=Space+Mono:ital@1&display=swap');
-    font-style: italic;
-  }
-
-  @font-face {
-    font-family: Mono;
-    src: url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@1,700&display=swap');
-    font-weight: 700;
-    font-style: italic;
-  }
-
-  @font-face {
-    font-family: Mono;
-    src: url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap');
-    font-weight: 700;
-  }
-
-  * {
-    font-family: Mono !important;
-  }
+const FontStyle = styled.div`
+  font-family: 'Space Mono' !important;
 `
+
+export const FontProvider = ({ children }) => {
+  return (
+    <>
+      <GoogleFontLoader
+        fonts={[
+          {
+            font: 'Space Mono',
+            weights: [400, '400i', 700, '700i'],
+          },
+        ]}
+      />
+      <FontStyle>{children}</FontStyle>
+    </>
+  )
+}

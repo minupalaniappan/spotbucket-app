@@ -2,22 +2,22 @@ import React from 'react'
 import { useContext } from 'react'
 import styled from 'styled-components'
 import { StateStore } from '../Store'
-import LinkButton from './LinkButton'
+import CopyButton from './CopyButton'
 
-const OpenLink = styled(({ className, disabled = false }) => {
+const CopyLink = styled(({ className, disabled = false }) => {
   const { dispatch } = useContext(StateStore)
 
   const onClick = () => {
     dispatch({
-      type: 'openLink',
+      type: 'shareClip',
     })
   }
 
-  return <LinkButton {...{ className, onClick: disabled ? null : onClick }} />
+  return <CopyButton {...{ className, onClick: disabled ? null : onClick }} />
 })`
   cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
   position: relative;
   bottom: 2px;
 `
 
-export default OpenLink
+export default CopyLink

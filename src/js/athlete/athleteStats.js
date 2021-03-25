@@ -5,7 +5,7 @@ import { StateStore } from '../Store'
 import { COLORS, FONT_SIZES } from '../theme'
 
 const BaseFontStyle = css`
-  font-weight: bold;
+  font-weight: 700;
   text-transform: uppercase;
   text-align: center;
 `
@@ -22,6 +22,7 @@ const StatValue = styled.div`
 
   color: ${COLORS.beige};
   font-size: ${FONT_SIZES.small};
+  font-weight: 400;
 `
 
 const Container = styled.div`
@@ -34,10 +35,17 @@ const Container = styled.div`
 const Row = styled.div`
   flex-direction: row;
   align-items: center;
+  height: fit-content;
+  display: flex;
 `
 
 const Cell = styled.div`
-  width: 50px;
+  align-items: center;
+  display: inline-flex;
+  flex-grow: 1;
+  justify-content: center;
+
+  max-width: calc(100% / 8);
 `
 
 const HeaderCell = styled(Cell)`
@@ -69,7 +77,7 @@ const AthleteStats = () => {
       <Row>
         {STATS.map((s, i) => (
           <Cell key={`${s}_${i}`}>
-            <StatValue>{stats[`player${s}`]}</StatValue>
+            <StatValue>{stats[`player${s}`] || 10.2}</StatValue>
           </Cell>
         ))}
       </Row>
