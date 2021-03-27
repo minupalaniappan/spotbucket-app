@@ -96,16 +96,13 @@ export const DataProvider = ({ children, Provider }) => {
           player: {
             nbaProfile: action.nba_profile,
             twitterProfile: action.twitter_profile,
+            playerNumber: action.player_number,
             playerPosition: action.position,
             playerImage: action.profile_image,
             playerTeamImage: action.team_image,
             playerName: action.player_name,
             playerTeam: action.team,
-            stats: {
-              playerPPG: action.stats.ppg,
-              playerAPG: action.stats.apg,
-              playerRPG: action.stats.rpg,
-            },
+            stats: action.stats,
           },
           plays: action.plays.filter(
             ({ videoUrl: { videoUrl } }) => videoUrl.length > 0

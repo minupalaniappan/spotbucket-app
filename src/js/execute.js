@@ -14,7 +14,23 @@ export const fetchData = async (value) => {
   return data
 }
 
+export const fetchStatsData = async (value) => {
+  const data = await fetch(`${HOST}/stats?name=${value}`)
+    .then((d) => d.json())
+    .then((e) => e)
+
+  return data
+}
+
 export const fetchNextPage = async ({ playerName, page }) => {
+  const e = await fetch(
+    `${HOST}?${new URLSearchParams({
+      name: playerName,
+      page: page,
+    })}`
+  ).then((e) => e.json())
+
+  console.log(e)
   const nextPageData = await fetch(
     `${HOST}?${new URLSearchParams({
       name: playerName,
@@ -52,8 +68,17 @@ const execute = async (value) => {
   }
 
   let data = await fetchData(value)
+  let dataStats = await fetchStatsData(value)
 
-  if (data) {
+  if (data && dataStats) {
+    data = {
+      ...data,
+      player: {
+        ...data.player,
+        stats: dataStats,
+      },
+    }
+
     install(data)
   }
 }

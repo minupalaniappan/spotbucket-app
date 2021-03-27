@@ -7,6 +7,7 @@ import ProgressBar from '../content/progress'
 import ControlCollection from '../controls/controlCollection'
 import ToggleCollection from '../controls/toggleCollection'
 import AthleteStats from '../athlete/athleteStats'
+import { WIDTHS } from '../theme'
 
 const Container = styled.div`
   display: flex;
@@ -17,6 +18,8 @@ const Row = styled.div`
   display: flex;
   flex-direction: row;
   align-items: top;
+
+  ${({ padded }) => (padded ? `padding: 0 ${WIDTHS.small}` : '')};
 `
 
 const Col = styled.div`
@@ -31,11 +34,11 @@ const Dashboard = () => {
   return (
     <Container>
       <Toolbar />
-      <Row>
+      <Row padded>
         <Col>
           <AthletePicture />
         </Col>
-        <Col>
+        <Col grow>
           <AthleteDescription />
           <Row>
             <Col grow>
@@ -43,9 +46,6 @@ const Dashboard = () => {
               <ProgressBar />
             </Col>
           </Row>
-        </Col>
-        <Col grow>
-          <ToggleCollection />
         </Col>
       </Row>
     </Container>

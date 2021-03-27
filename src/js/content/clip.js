@@ -39,20 +39,14 @@ const LoaderFrame = styled.div`
 const Clip = () => {
   const {
     dispatch,
-    state: {
-      muted,
-      ready,
-      plays = [],
-      currentClip,
-      totalPages,
-      page,
-      playerName,
-    },
+    state: { muted, ready, plays = [], currentClip, totalPages, page, player },
   } = useContext(StateStore)
 
-  if (plays.length === 0) {
+  if (plays.length === 0 || !player) {
     return null
   }
+
+  const { playerName } = player
 
   const endOfPage = currentClip + 1 === plays.length
   const endOfPages = page + 1 === totalPages

@@ -45,14 +45,47 @@ const Cell = styled.div`
   flex-grow: 1;
   justify-content: center;
 
-  max-width: calc(100% / 8);
+  max-width: calc(100% / 11);
 `
 
 const HeaderCell = styled(Cell)`
   background: ${COLORS.beige};
 `
 
-const STATS = ['PPG', 'APG', 'RPG', 'SPG', 'BPG', '3PM', 'FG', 'FT']
+const STATS = [
+  'PPG',
+  'APG',
+  'RPG',
+  'SPG',
+  'BPG',
+  '3PM',
+  'FG%',
+  'FT%',
+  '3PT%',
+  'TO',
+  'MP',
+]
+const STATS_MAP = {
+  PPG: 'PTS',
+  APG: 'AST',
+  RPG: 'REB',
+  SPG: 'STL',
+  BPG: 'BLK',
+  '3PM': 'FG3M',
+  'FG%': 'FG_PCT',
+  'FT%': 'FT_PCT',
+  '3PT%': 'FG3_PCT',
+  TO: 'TOV',
+  MP: 'MIN',
+}
+
+const round = (key, val) => {
+  if (['FG%', 'FT%', '3PT%'].includes(key)) {
+    return Math.round(val * 100)
+  }
+
+  return val
+}
 
 const AthleteStats = () => {
   const { state } = useContext(StateStore)
@@ -77,7 +110,7 @@ const AthleteStats = () => {
       <Row>
         {STATS.map((s, i) => (
           <Cell key={`${s}_${i}`}>
-            <StatValue>{stats[`player${s}`] || 10.2}</StatValue>
+            <StatValue>{round(s, stats[STATS_MAP[s]]) || 0.0}</StatValue>
           </Cell>
         ))}
       </Row>
