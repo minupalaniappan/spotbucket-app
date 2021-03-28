@@ -82,7 +82,7 @@ export const DataProvider = ({ children, Provider }) => {
       case 'shareClip':
         copy(_plays[_currentClip].videoUrl.videoUrl)
 
-        return
+        return prevState
       case 'openLink':
         window.open(_plays[_currentClip].videoUrl.videoUrl, '_blank')
 
