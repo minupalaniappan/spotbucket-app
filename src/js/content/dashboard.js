@@ -28,6 +28,7 @@ const Col = styled.div`
 
   ${({ grow }) => (grow ? 'flex-grow: 1;' : '')};
   ${({ top }) => (top ? 'align-items: flex-start' : '')};
+  ${({ paddedRight }) => (paddedRight ? `padding-right: ${WIDTHS.small}` : '')};
 `
 
 const Dashboard = () => {
@@ -35,7 +36,7 @@ const Dashboard = () => {
     <Container>
       <Toolbar />
       <Row padded>
-        <Col>
+        <Col paddedRight>
           <AthletePicture />
         </Col>
         <Col grow>

@@ -3,6 +3,7 @@ import { useContext } from 'react'
 import styled from 'styled-components'
 import { StateStore } from '../Store'
 import CopyButton from './CopyButton'
+import Hover from './hover'
 
 const CopyLink = styled(({ className, disabled = false }) => {
   const { dispatch } = useContext(StateStore)
@@ -15,9 +16,7 @@ const CopyLink = styled(({ className, disabled = false }) => {
 
   return <CopyButton {...{ className, onClick: disabled ? null : onClick }} />
 })`
-  cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
-  position: relative;
-  bottom: 2px;
+  ${Hover}
 `
 
 export default CopyLink

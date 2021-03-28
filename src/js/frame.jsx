@@ -1,4 +1,11 @@
-import React, { useState, useEffect, useReducer, createContext } from 'react'
+import React, {
+  useState,
+  useEffect,
+  useReducer,
+  createContext,
+  useContext,
+  useReft,
+} from 'react'
 import styled from 'styled-components'
 import Clip from './content/clip'
 import { useSpring, animated } from 'react-spring'
@@ -8,20 +15,41 @@ import { StateStore } from './Store'
 import Mount from './mount'
 import Dashboard from './content/dashboard'
 
+const DisplayNone = styled.div`
+  ${({ isEnded }) => (isEnded ? `display: none;` : '')};
+`
+
 const AnimationFrame = styled(({ className, children }) => {
   const [isReady, setIsReady] = useState(false)
+  const [isEnded, setIsEnded] = useState(false)
+
+  const { state } = useContext(StateStore)
+
+  if (!state) {
+    return
+  }
+
+  const { clipClosed = true } = state
 
   useEffect(() => {
     setIsReady(true)
   }, [])
 
   const props = useSpring({
-    opacity: !isReady ? `1.0` : `1.0`,
-    height: !isReady ? `0px` : `530px`,
+    opacity: !isReady || clipClosed ? 0.9 : 1.0,
+    height: !isReady || clipClosed ? `0px` : `530px`,
   })
 
+  useEffect(() => {
+    if (isReady && clipClosed) {
+      setIsEnded(true)
+    }
+  }, [clipClosed])
+
   return (
-    <animated.div {...{ className, style: props }}>{children}</animated.div>
+    <animated.div {...{ className, style: props }}>
+      <DisplayNone {...{ isEnded }}>{children}</DisplayNone>
+    </animated.div>
   )
 })`
   position: fixed !important;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useContext } from 'react'
 import ReactPlayer from 'react-player'
 import styled from 'styled-components'
 import { Spinner } from 'evergreen-ui'

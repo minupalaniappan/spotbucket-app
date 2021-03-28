@@ -30,7 +30,6 @@ export const fetchNextPage = async ({ playerName, page }) => {
     })}`
   ).then((e) => e.json())
 
-  console.log(e)
   const nextPageData = await fetch(
     `${HOST}?${new URLSearchParams({
       name: playerName,
