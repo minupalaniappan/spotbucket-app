@@ -6,25 +6,30 @@ import Next from './next'
 import Play from './play'
 import Previous from './previous'
 
-const PositionedContainer = styled.div`
-  position: absolute;
-  z-index: 2;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  bottom: 20px;
-`
-
 const PlayerContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background: ${COLORS.black};
-  padding: 0px ${WIDTHS.small};
-  border-radius: 20px;
+  position: relative;
+  bottom: 5px;
+
+  > div {
+    flex-grow: 1;
+  }
+
+  > div:nth-child(2) {
+    justify-content: center;
+  }
+
+  > div:last-child {
+    justify-content: flex-end;
+
+    > svg {
+      position: relative;
+      right: 20px;
+    }
+  }
 
   > div {
     align-items: center;
@@ -37,24 +42,22 @@ const PlayerContainer = styled.div`
     gap: 5px;
     padding-right: 10px;
     margin-right: 10px;
-    border-right: 1px solid ${COLORS.dusk};
   }
 `
 
 const Player = () => {
   return (
-    <PositionedContainer>
-      <PlayerContainer>
-        <div>
-          <Previous />
-          <Play />
-          <Next />
-        </div>
-        <div>
-          <Mute />
-        </div>
-      </PlayerContainer>
-    </PositionedContainer>
+    <PlayerContainer>
+      <div />
+      <div>
+        <Previous />
+        <Play />
+        <Next />
+      </div>
+      <div>
+        <Mute />
+      </div>
+    </PlayerContainer>
   )
 }
 

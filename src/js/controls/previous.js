@@ -12,20 +12,37 @@ const Previous = styled(({ className }) => {
     return null
   }
 
-  const { prevDisabled } = state
+  const { currentClip, currentPage, ready } = state
+
+  let type
+  if (currentClip === 0) {
+    type = 'prevPage'
+  } else {
+    type = 'prevClip'
+  }
 
   return (
     <BackwardButton
       {...{
         className,
-        disabled: prevDisabled,
-        onClick: prevDisabled
-          ? null
-          : () => {
-              dispatch({
-                type: 'prevClip',
-              })
-            },
+        disabled: currentPage === 0 || !ready,
+        onClick:
+          currentPage === 0 || !ready
+            ? null
+            : async () => {
+                let plays = {}
+                if (type === 'prevPage') {
+                  plays = await fetchNextPage({
+                    playerName,
+                    page: page - 1,
+                  })
+                }
+
+                dispatch({
+                  type,
+                  plays: plays.plays,
+                })
+              },
       }}
     />
   )

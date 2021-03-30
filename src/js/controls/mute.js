@@ -13,7 +13,7 @@ const Mute = styled(({ className }) => {
     return null
   }
 
-  const { muted } = state
+  const { muted, ready } = state
 
   const onClick = () => {
     dispatch({
@@ -23,9 +23,17 @@ const Mute = styled(({ className }) => {
 
   let component
   if (muted) {
-    component = <MuteButton {...{ className, disabled: false, onClick }} />
+    component = (
+      <MuteButton
+        {...{ className, disabled: !ready, onClick: ready ? onClick : null }}
+      />
+    )
   } else {
-    component = <UnmuteButton {...{ className, disabled: false, onClick }} />
+    component = (
+      <UnmuteButton
+        {...{ className, disabled: !ready, onClick: ready ? onClick : null }}
+      />
+    )
   }
 
   return component

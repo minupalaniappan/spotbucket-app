@@ -18,7 +18,7 @@ const Progress = () => {
 
   let { clipCurrent = 0, clipTotal = 1 } = state
 
-  const width = (clipCurrent / clipTotal) * 100
+  const width = Math.round((clipCurrent / clipTotal) * 100) + 1
 
   const style = useSpring({
     width: `${width}%`,

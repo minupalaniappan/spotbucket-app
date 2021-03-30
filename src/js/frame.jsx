@@ -4,7 +4,6 @@ import React, {
   useReducer,
   createContext,
   useContext,
-  useReft,
 } from 'react'
 import styled from 'styled-components'
 import Clip from './content/clip'
@@ -14,6 +13,7 @@ import { DataProvider } from './Provider'
 import { StateStore } from './Store'
 import Mount from './mount'
 import Dashboard from './content/dashboard'
+import Player from './controls/player'
 
 const DisplayNone = styled.div`
   ${({ isEnded }) => (isEnded ? `display: none;` : '')};
@@ -37,7 +37,7 @@ const AnimationFrame = styled(({ className, children }) => {
 
   const props = useSpring({
     opacity: !isReady || clipClosed ? 0.9 : 1.0,
-    height: !isReady || clipClosed ? `0px` : `530px`,
+    height: !isReady || clipClosed ? `0px` : `575px`,
   })
 
   useEffect(() => {
@@ -77,6 +77,7 @@ const Frame = (data) => {
           <StyledAnimationFrame>
             <Dashboard />
             <Clip />
+            <Player />
           </StyledAnimationFrame>
         </FontProvider>
       </Mount>

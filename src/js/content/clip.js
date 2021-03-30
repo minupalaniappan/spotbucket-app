@@ -4,11 +4,10 @@ import styled from 'styled-components'
 import { Spinner } from 'evergreen-ui'
 import { StateStore } from '../Store'
 import { fetchNextPage } from '../execute'
-import Player from '../controls/player'
 
 const ReactPlayerFrame = styled.div`
   position: relative;
-  height: 200%;
+  height: 360px;
 
   > div:first-child {
     position: absolute !important;
@@ -70,13 +69,6 @@ const Clip = () => {
           onEnded={async () => {
             if (endOfPage) {
               if (endOfPages) {
-                const plays = await fetchNextPage({ playerName, page: 0 })
-
-                dispatch({
-                  type: 'setPage',
-                  page: 0,
-                  ...plays,
-                })
               } else {
                 const plays = await fetchNextPage({
                   playerName,
@@ -133,7 +125,6 @@ const Clip = () => {
           }
           {...{ muted, playing: !paused, volume: 1 }}
         />
-        {ready ? <Player /> : ''}
       </ReactPlayerFrame>
       {!ready ? (
         <LoaderFrame>

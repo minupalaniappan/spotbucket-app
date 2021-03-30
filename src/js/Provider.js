@@ -67,22 +67,18 @@ export const DataProvider = ({ children, Provider }) => {
           plays: action.plays,
         })
       case 'nextPage':
-        prevState = Object.assign({}, prevState, {
-          prevDisabled: true,
-          nextDisabled: true,
-          muteDisabled: true,
-          shareDisabled: true,
-        })
-
-        let nextPageNumber
-        if (_page + 1 > _totalPages) {
-          nextPageNumber = 0
-        } else {
-          nextPageNumber = _page + 1
-        }
+        let nextPageNumber = _page + 1
 
         return Object.assign({}, prevState, {
           page: nextPageNumber,
+          plays: action.plays,
+        })
+      case 'prevPage':
+        let prevPageNumber = _page - 1
+
+        return Object.assign({}, prevState, {
+          page: prevPageNumber,
+          plays: action.plays,
         })
       case 'shareClip':
         copy(_plays[_currentClip].videoUrl.videoUrl)

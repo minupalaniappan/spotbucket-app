@@ -13,7 +13,7 @@ const Play = styled(({ className }) => {
     return null
   }
 
-  const { paused } = state
+  const { paused, ready } = state
 
   const onClick = () => {
     dispatch({
@@ -23,9 +23,17 @@ const Play = styled(({ className }) => {
 
   let component
   if (paused) {
-    component = <PlayButton {...{ className, disabled: false, onClick }} />
+    component = (
+      <PlayButton
+        {...{ className, disabled: !ready, onClick: ready ? onClick : null }}
+      />
+    )
   } else {
-    component = <PauseButton {...{ className, disabled: false, onClick }} />
+    component = (
+      <PauseButton
+        {...{ className, disabled: !ready, onClick: ready ? onClick : null }}
+      />
+    )
   }
 
   return component

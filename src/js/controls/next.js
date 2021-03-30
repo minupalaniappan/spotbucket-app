@@ -12,7 +12,7 @@ const Next = styled(({ className }) => {
     return null
   }
 
-  const { nextDisabled, currentClip, plays } = state
+  const { currentClip, plays, hasNextPage, ready } = state
 
   let type
   if (currentClip + 1 === plays.length) {
@@ -25,14 +25,24 @@ const Next = styled(({ className }) => {
     <ForwardButton
       {...{
         className,
-        disabled: nextDisabled,
-        onClick: nextDisabled
-          ? null
-          : () => {
-              dispatch({
-                type,
-              })
-            },
+        disabled: !hasNextPage || !ready,
+        onClick:
+          !hasNextPage || !ready
+            ? null
+            : async () => {
+                let plays = {}
+                if (type === 'nextPage') {
+                  plays = await fetchNextPage({
+                    playerName,
+                    page: page + 1,
+                  })
+                }
+
+                dispatch({
+                  type,
+                  plays: plays.plays,
+                })
+              },
       }}
     />
   )
