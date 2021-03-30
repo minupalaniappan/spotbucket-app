@@ -49,6 +49,7 @@ export const DataProvider = ({ children, Provider }) => {
       case 'closeClip':
         return Object.assign({}, prevState, {
           clipClosed: !_clipClosed,
+          paused: true,
         })
       case 'setError':
         return Object.assign({}, prevState, {
