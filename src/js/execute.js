@@ -59,8 +59,6 @@ const install = (data) => {
 }
 
 const execute = async (value) => {
-  value = 'Bradley Beal'
-
   if (value === '') {
     return
   }

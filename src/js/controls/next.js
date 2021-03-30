@@ -1,9 +1,11 @@
 import React from 'react'
-import ToggleButton from './toggleButton'
 import { useContext } from 'react'
 import { StateStore } from '../Store'
+import ForwardButton from './buttons/ForwardButton'
+import Hover from './hover'
+import styled from 'styled-components'
 
-const NextButton = () => {
+const Next = styled(({ className }) => {
   const { dispatch, state } = useContext(StateStore)
 
   if (!state) {
@@ -20,18 +22,22 @@ const NextButton = () => {
   }
 
   return (
-    <ToggleButton
+    <ForwardButton
       {...{
+        className,
         disabled: nextDisabled,
-        toggleDirection: 'next',
-        onClick: () => {
-          dispatch({
-            type,
-          })
-        },
+        onClick: nextDisabled
+          ? null
+          : () => {
+              dispatch({
+                type,
+              })
+            },
       }}
     />
   )
-}
+})`
+  ${Hover}
+`
 
-export default NextButton
+export default Next

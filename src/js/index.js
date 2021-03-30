@@ -1,5 +1,5 @@
 import getSelection from './listener'
-import { execute, install } from './execute'
+import { execute } from './execute'
 
 const app = () => {
   getSelection((e) => execute(e.toString().trim()))
@@ -7,5 +7,5 @@ const app = () => {
 
 window.addEventListener('load', () => {
   app()
-  execute()
+  execute('Bradley Beal')
 })

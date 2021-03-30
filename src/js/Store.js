@@ -6,6 +6,7 @@ export const initialState = {
   currentClip: 4,
   muted: true,
   clipClosed: false,
+  paused: false,
   page: 0,
   playerName: '',
   plays: [],

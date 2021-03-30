@@ -4,7 +4,7 @@ import { useSpring, animated } from 'react-spring'
 import styled from 'styled-components'
 import { StateStore } from '../Store'
 import { COLORS, FONT_SIZES } from '../theme'
-import CopyButton from './CopyButton'
+import CopyButton from './buttons/CopyButton'
 import Hover from './hover'
 
 const CopyToast = styled(({ className, clicked }) => {

@@ -11,9 +11,14 @@ export const DataProvider = ({ children, Provider }) => {
       totalPages: _totalPages,
       page: _page,
       plays: _plays,
+      paused: _paused,
     } = prevState
 
     switch (action.type) {
+      case 'pauseClip':
+        return Object.assign({}, prevState, {
+          paused: !_paused,
+        })
       case 'updateClipProgress':
         return Object.assign({}, prevState, {
           clipCurrent: action.clipCurrent,
@@ -70,7 +75,7 @@ export const DataProvider = ({ children, Provider }) => {
         })
 
         let nextPageNumber
-        if (page + 1 > _totalPages) {
+        if (_page + 1 > _totalPages) {
           nextPageNumber = 0
         } else {
           nextPageNumber = _page + 1

@@ -1,32 +1,19 @@
 import React from 'react'
 import { useContext } from 'react'
-import styled from 'styled-components'
 import { StateStore } from '../Store'
-import { COLORS } from '../theme'
+import styled from 'styled-components'
+import Hover from './hover'
+import UnmuteButton from './buttons/UnmuteButton'
+import MuteButton from './buttons/MuteButton'
 
-const MuteText = styled.div`
-  text-transform: uppercase;
-  color: ${COLORS.black};
-  font-weight: 700;
-  font-size: 12px;
-`
-
-const MuteButton = styled.div`
-  background: ${({ muted }) => (muted ? COLORS.grey : COLORS.beige)};
-  color: ${COLORS.black};
-  text-align: center;
-  cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
-  opacity: ${({ disabled }) => (disabled ? 0.9 : 1.0)};
-`
-
-const Mute = () => {
+const Mute = styled(({ className }) => {
   const { dispatch, state } = useContext(StateStore)
 
   if (!state) {
     return null
   }
 
-  const { muted, muteDisabled } = state
+  const { muted } = state
 
   const onClick = () => {
     dispatch({
@@ -34,17 +21,16 @@ const Mute = () => {
     })
   }
 
-  return (
-    <MuteButton
-      {...{
-        muted,
-        disabled: muteDisabled,
-        onClick: muteDisabled ? null : onClick,
-      }}
-    >
-      <MuteText>{muted ? 'Unmute' : 'Mute'}</MuteText>
-    </MuteButton>
-  )
-}
+  let component
+  if (muted) {
+    component = <MuteButton {...{ className, disabled: false, onClick }} />
+  } else {
+    component = <UnmuteButton {...{ className, disabled: false, onClick }} />
+  }
+
+  return component
+})`
+  ${Hover}
+`
 
 export default Mute

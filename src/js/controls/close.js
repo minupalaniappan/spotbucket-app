@@ -1,7 +1,7 @@
 import React from 'react'
 import { useContext } from 'react'
 import styled from 'styled-components'
-import CloseButton from './CloseButton'
+import CloseButton from './buttons/CloseButton'
 import { StateStore } from '../Store'
 import Hover from './hover'
 

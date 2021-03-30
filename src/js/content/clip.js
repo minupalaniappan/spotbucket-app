@@ -4,11 +4,13 @@ import styled from 'styled-components'
 import { Spinner } from 'evergreen-ui'
 import { StateStore } from '../Store'
 import { fetchNextPage } from '../execute'
+import Player from '../controls/player'
 
 const ReactPlayerFrame = styled.div`
   position: relative;
+  height: 200%;
 
-  > div {
+  > div:first-child {
     position: absolute !important;
     width: auto !important;
     top: -8px;
@@ -40,7 +42,16 @@ const LoaderFrame = styled.div`
 const Clip = () => {
   const {
     dispatch,
-    state: { muted, ready, plays = [], currentClip, totalPages, page, player },
+    state: {
+      muted,
+      ready,
+      plays = [],
+      currentClip,
+      totalPages,
+      page,
+      player,
+      paused,
+    },
   } = useContext(StateStore)
 
   if (plays.length === 0 || !player) {
@@ -120,8 +131,9 @@ const Clip = () => {
               clipCurrent: playedSeconds,
             })
           }
-          {...{ muted, playing: true, volume: 1 }}
+          {...{ muted, playing: !paused, volume: 1 }}
         />
+        {ready ? <Player /> : ''}
       </ReactPlayerFrame>
       {!ready ? (
         <LoaderFrame>
