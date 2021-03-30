@@ -65,7 +65,6 @@ const StyledAnimationFrame = styled(AnimationFrame)`
   width: 600px;
   position: fixed !important;
   right: 30px !important;
-  box-shadow: 10px 10px 10px ${COLORS.grey};
 `
 
 const Frame = (data) => {

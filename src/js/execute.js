@@ -2,7 +2,6 @@ import fetch from 'node-fetch'
 import { render } from 'react-dom'
 import React from 'react'
 import { Frame } from './frame.jsx'
-import BradleyBeal from '../fixtures/bradley_beal.json'
 
 const HOST = 'http://localhost:5000'
 
@@ -54,28 +53,26 @@ const insertRoot = () => {
 }
 
 const install = (data) => {
-  data = BradleyBeal
-
   insertRoot()
 
   render(<Frame {...data} />, document.getElementById('cherry-root'))
 }
 
 const execute = async (value) => {
+  value = 'Bradley Beal'
+
   if (value === '') {
     return
   }
 
   let data = await fetchData(value)
-  let dataStats = await fetchStatsData(value)
 
-  if (data && dataStats) {
+  let { stats } = await fetchStatsData(value)
+
+  if (data && stats) {
     data = {
       ...data,
-      player: {
-        ...data.player,
-        stats: dataStats,
-      },
+      stats,
     }
 
     install(data)

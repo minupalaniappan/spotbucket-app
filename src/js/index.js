@@ -7,5 +7,5 @@ const app = () => {
 
 window.addEventListener('load', () => {
   app()
-  install()
+  execute()
 })

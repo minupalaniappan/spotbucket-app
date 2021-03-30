@@ -29,6 +29,7 @@ const LoaderFrame = styled.div`
   > div {
     display: flex;
     position: relative;
+    top: 125px;
 
     circle {
       stroke: white !important;
@@ -93,7 +94,7 @@ const Clip = () => {
             })
             dispatch({
               type: 'updateClipTotal',
-              clipTotal: 0,
+              clipTotal: 1,
             })
           }}
           url={plays[currentClip].videoUrl.videoUrl}
