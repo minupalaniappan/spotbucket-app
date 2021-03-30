@@ -2,24 +2,24 @@ import React from 'react'
 
 const ForwardButton = ({ className, onClick }) => (
   <svg
-    width='22'
-    height='22'
-    viewBox='0 0 24 24'
+    width='12'
+    height='12'
+    viewBox='0 0 12 12'
     fill='none'
     xmlns='http://www.w3.org/2000/svg'
     {...{ className, onClick }}
   >
     <path
-      d='M5 4L15 12L5 20V4Z'
-      stroke='#FFF6F6'
-      strokeWidth='1'
+      d='M2.5 2L7.5 6L2.5 10L2.5 2Z'
+      fill='#FFF7F7'
+      stroke='#FFF7F7'
       strokeLinecap='round'
       strokeLinejoin='round'
     />
     <path
-      d='M19 5V19'
-      stroke='#FFF6F6'
-      strokeWidth='1'
+      d='M9.5 2.5V9.5'
+      stroke='#FFF7F7'
+      strokeWidth='2'
       strokeLinecap='round'
       strokeLinejoin='round'
     />

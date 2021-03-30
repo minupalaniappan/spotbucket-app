@@ -2,25 +2,24 @@ import React from 'react'
 
 const BackwardButton = ({ className, onClick }) => (
   <svg
-    width='22'
-    height='22'
-    viewBox='0 0 24 24'
+    width='12'
+    height='12'
+    viewBox='0 0 12 12'
     fill='none'
-    stroke='#FFF6F6'
     xmlns='http://www.w3.org/2000/svg'
-    {...{ onClick, className }}
+    {...{ className, onClick }}
   >
     <path
-      d='M19 20L9 12L19 4V20Z'
-      stroke='#FFF6F6'
-      strokeWidth='1'
+      d='M9.5 10L4.5 6L9.5 2L9.5 10Z'
+      fill='#FFF7F7'
+      stroke='#FFF7F7'
       strokeLinecap='round'
       strokeLinejoin='round'
     />
     <path
-      d='M5 19V5'
-      stroke='#FFF6F6'
-      strokeWidth='1'
+      d='M2.5 9.5L2.5 2.5'
+      stroke='#FFF7F7'
+      strokeWidth='2'
       strokeLinecap='round'
       strokeLinejoin='round'
     />
