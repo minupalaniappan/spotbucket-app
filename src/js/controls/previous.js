@@ -12,7 +12,7 @@ const Previous = styled(({ className }) => {
     return null
   }
 
-  const { currentClip, currentPage, ready } = state
+  const { currentClip, page, ready } = state
 
   let type
   if (currentClip === 0) {
@@ -25,9 +25,9 @@ const Previous = styled(({ className }) => {
     <BackwardButton
       {...{
         className,
-        disabled: currentPage === 0 || !ready,
+        disabled: page === 0 || !ready,
         onClick:
-          currentPage === 0 || !ready
+          page === 0 || !ready
             ? null
             : async () => {
                 let plays = {}
