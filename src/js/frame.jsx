@@ -37,7 +37,7 @@ const AnimationFrame = styled(({ className, children }) => {
 
   const props = useSpring({
     opacity: !isReady || clipClosed ? 0.9 : 1.0,
-    height: !isReady || clipClosed ? `0px` : `575px`,
+    height: !isReady || clipClosed ? `0px` : `565px`,
   })
 
   useEffect(() => {

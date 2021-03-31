@@ -9,6 +9,8 @@ const ReactPlayerFrame = styled.div`
   position: relative;
   height: 360px;
 
+  ${({ ready }) => (!ready ? 'display: none;' : '')}
+
   > div:first-child {
     position: absolute !important;
     width: auto !important;
@@ -26,11 +28,11 @@ const LoaderFrame = styled.div`
   flex-grow: 1;
   align-items: center;
   justify-content: center;
+  height: 360px;
 
   > div {
     display: flex;
     position: relative;
-    top: 125px;
 
     circle {
       stroke: white !important;
@@ -64,7 +66,7 @@ const Clip = () => {
 
   return (
     <>
-      <ReactPlayerFrame>
+      <ReactPlayerFrame {...{ ready }}>
         <ReactPlayer
           onEnded={async () => {
             if (endOfPage) {

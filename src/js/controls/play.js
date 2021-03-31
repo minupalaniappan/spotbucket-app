@@ -5,6 +5,7 @@ import Hover from './hover'
 import PlayButton from './buttons/PlayButton'
 import PauseButton from './buttons/PauseButton'
 import styled from 'styled-components'
+import { COLORS } from '../theme'
 
 const Play = styled(({ className }) => {
   const { dispatch, state } = useContext(StateStore)
@@ -38,7 +39,30 @@ const Play = styled(({ className }) => {
 
   return component
 })`
-  ${Hover}
+  ${({ disabled }) =>
+    disabled
+      ? `
+cursor: default;
+svg, path, circle {
+  color: ${COLORS.grey};
+  stroke: ${COLORS.grey};
+  fill: ${COLORS.grey};
+}
+`
+      : `
+cursor: pointer;
+
+&:hover {
+  circle {
+    color: ${COLORS.white};
+    fill: ${COLORS.white};
+  }
+}
+
+path, circle {
+  transition: all 0.5s;
+}
+`}
 `
 
 export default Play

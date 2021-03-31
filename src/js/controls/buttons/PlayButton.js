@@ -1,4 +1,5 @@
 import React from 'react'
+import { COLORS } from '../../theme'
 
 const PlayButton = ({ className, onClick }) => (
   <svg
@@ -9,7 +10,7 @@ const PlayButton = ({ className, onClick }) => (
     xmlns='http://www.w3.org/2000/svg'
     {...{ className, onClick }}
   >
-    <circle cx='15' cy='15' r='15' fill='#FFF7F7' />
+    <circle cx='15' cy='15' r='15' fill={COLORS.grey} />
     <path
       d='M13 10L18.598 14.665L13 19.33L13 10Z'
       fill='black'

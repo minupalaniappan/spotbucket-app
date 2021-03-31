@@ -1,4 +1,5 @@
 import React from 'react'
+import { COLORS } from '../../theme'
 
 const MuteButton = ({ className, onClick }) => (
   <svg
@@ -11,21 +12,21 @@ const MuteButton = ({ className, onClick }) => (
   >
     <path
       d='M11 5L6 9H2V15H6L11 19V5Z'
-      stroke='#FFF6F6'
+      stroke={COLORS.grey}
       strokeWidth='1'
       strokeLinecap='round'
       strokeLinejoin='round'
     />
     <path
       d='M23 9L17 15'
-      stroke='#FFF6F6'
+      stroke={COLORS.grey}
       strokeWidth='1'
       strokeLinecap='round'
       strokeLinejoin='round'
     />
     <path
       d='M17 9L23 15'
-      stroke='#FFF6F6'
+      stroke={COLORS.grey}
       strokeWidth='1'
       strokeLinecap='round'
       strokeLinejoin='round'

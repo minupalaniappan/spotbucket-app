@@ -1,4 +1,5 @@
 import React from 'react'
+import { COLORS } from '../../theme'
 
 const CloseButton = ({ className, onClick }) => (
   <svg
@@ -11,14 +12,14 @@ const CloseButton = ({ className, onClick }) => (
   >
     <path
       d='M12 4L4 12'
-      stroke='#FFF7F7'
+      stroke={COLORS.grey}
       strokeWidth='1'
       strokeLinecap='round'
       strokeLinejoin='round'
     />
     <path
       d='M4 4L12 12'
-      stroke='#FFF7F7'
+      stroke={COLORS.grey}
       strokeWidth='1'
       strokeLinecap='round'
       strokeLinejoin='round'

@@ -1,4 +1,5 @@
 import React from 'react'
+import { COLORS } from '../../theme'
 
 const BackwardButton = ({ className, onClick }) => (
   <svg
@@ -11,14 +12,14 @@ const BackwardButton = ({ className, onClick }) => (
   >
     <path
       d='M9.5 10L4.5 6L9.5 2L9.5 10Z'
-      fill='#FFF7F7'
-      stroke='#FFF7F7'
+      fill={COLORS.grey}
+      stroke={COLORS.grey}
       strokeLinecap='round'
       strokeLinejoin='round'
     />
     <path
       d='M2.5 9.5L2.5 2.5'
-      stroke='#FFF7F7'
+      stroke={COLORS.grey}
       strokeWidth='2'
       strokeLinecap='round'
       strokeLinejoin='round'

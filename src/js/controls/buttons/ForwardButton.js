@@ -1,4 +1,5 @@
 import React from 'react'
+import { COLORS } from '../../theme'
 
 const ForwardButton = ({ className, onClick }) => (
   <svg
@@ -11,14 +12,14 @@ const ForwardButton = ({ className, onClick }) => (
   >
     <path
       d='M2.5 2L7.5 6L2.5 10L2.5 2Z'
-      fill='#FFF7F7'
-      stroke='#FFF7F7'
+      fill={COLORS.grey}
+      stroke={COLORS.grey}
       strokeLinecap='round'
       strokeLinejoin='round'
     />
     <path
       d='M9.5 2.5V9.5'
-      stroke='#FFF7F7'
+      stroke={COLORS.grey}
       strokeWidth='2'
       strokeLinecap='round'
       strokeLinejoin='round'

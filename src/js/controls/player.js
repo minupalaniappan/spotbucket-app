@@ -12,13 +12,14 @@ const PlayerContainer = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
-  bottom: 5px;
+  bottom: 13px;
 
   > div {
     flex-grow: 1;
   }
 
   > div:nth-child(2) {
+    gap: 15px;
     justify-content: center;
   }
 
@@ -39,7 +40,6 @@ const PlayerContainer = styled.div`
   }
 
   > div:first-child {
-    gap: 5px;
     padding-right: 10px;
     margin-right: 10px;
   }

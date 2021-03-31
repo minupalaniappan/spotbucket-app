@@ -2,7 +2,7 @@ import React from 'react'
 import { useContext } from 'react'
 import { StateStore } from '../Store'
 import BackwardButton from './buttons/BackwardButton'
-import Hover from './hover'
+import { NonHoverFill } from './hover'
 import styled from 'styled-components'
 
 const Previous = styled(({ className }) => {
@@ -47,7 +47,7 @@ const Previous = styled(({ className }) => {
     />
   )
 })`
-  ${Hover}
+  ${NonHoverFill}
 `
 
 export default Previous
