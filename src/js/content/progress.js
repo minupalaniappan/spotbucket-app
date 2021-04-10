@@ -16,9 +16,13 @@ const ProgressElement = styled.div`
 const Progress = () => {
   const { state } = useContext(StateStore)
 
-  let { clipCurrent = 0, clipTotal = 1 } = state
+  let { clipCurrent = 0, clipTotal = 1, ready } = state
 
-  const width = Math.round((clipCurrent / clipTotal) * 100) + 1
+  let width = Math.round((clipCurrent / clipTotal) * 100) + 1
+
+  if (!ready) {
+    width = 0
+  }
 
   const style = useSpring({
     width: `${width}%`,
@@ -28,6 +32,7 @@ const Progress = () => {
     left: 0,
     top: 0,
     height: '5px',
+    maxWidth: '100%',
   })
 
   return (

@@ -62,6 +62,7 @@ export const DataProvider = ({ children, Provider }) => {
           nextDisabled: !action.ready,
           muteDisabled: !action.ready,
           shareDisabled: !action.ready,
+          clipCurrent: 0,
         })
       case 'setPlays':
         return Object.assign({}, prevState, {

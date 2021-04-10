@@ -66,7 +66,15 @@ const Clip = () => {
 
   return (
     <>
-      <ReactPlayerFrame {...{ ready }}>
+      <ReactPlayerFrame
+        {...{
+          ready,
+          onClick: () =>
+            dispatch({
+              type: 'pauseClip',
+            }),
+        }}
+      >
         <ReactPlayer
           onEnded={async () => {
             if (endOfPage) {
@@ -119,6 +127,7 @@ const Clip = () => {
               error: e,
             })
           }}
+          progressInterval={5}
           onProgress={({ playedSeconds }) =>
             dispatch({
               type: 'updateClipProgress',

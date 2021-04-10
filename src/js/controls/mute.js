@@ -15,7 +15,7 @@ const Mute = styled(({ className }) => {
 
   const { muted, ready } = state
 
-  const onClick = () => {
+  const onClick = async () => {
     dispatch({
       type: 'muteClip',
     })
