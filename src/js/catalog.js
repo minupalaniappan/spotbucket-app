@@ -6,6 +6,7 @@ import { htmlToText } from 'html-to-text'
 import { PLAYERNAMES } from '../fixtures/Names'
 import { COLORS, FONT_SIZES } from './theme'
 import { fetchData, fetchStatsData } from './execute'
+import BackwardArrowButton from './controls/buttons/BackwardArrowButton'
 
 const AnimationFrame = styled(({ className, children, height = 200 }) => {
   const { state } = useContext(StateStore)
@@ -74,20 +75,35 @@ const List = styled.div`
   display: flex;
   flex-direction: column;
 
-  > div {
+  > div:first-child {
+    display: flex;
+    position: fixed;
     padding: 20px;
+    background: black;
+    z-index: 2;
+    flex-direction: row;
+    width: 560px;
     border-bottom: 1px solid ${COLORS.dusk};
-    color: ${COLORS.grey};
-    font-size: ${FONT_SIZES.small};
-    cursor: pointer;
-
-    &:hover {
-      background: ${COLORS.graphite};
-    }
   }
 
   > div:last-child {
-    border-bottom: none;
+    padding-top: 57px;
+
+    > div {
+      padding: 20px;
+      border-bottom: 1px solid ${COLORS.dusk};
+      color: ${COLORS.grey};
+      font-size: ${FONT_SIZES.small};
+      cursor: pointer;
+
+      &:hover {
+        background: ${COLORS.graphite};
+      }
+    }
+
+    > div:last-child {
+      border-bottom: none;
+    }
   }
 `
 
@@ -117,39 +133,44 @@ const Catalog = () => {
   return isOpen ? (
     <StyledAnimationFrame>
       <List>
-        {currentPlayers.map((e, i) => (
-          <div
-            key={i}
-            onClick={async () => {
-              dispatch({
-                type: 'setContainer',
-                container: 1,
-              })
+        <div>
+          <BackwardArrowButton onClick={() => setIsOpen(false)} />
+        </div>
+        <div>
+          {currentPlayers.map((e, i) => (
+            <div
+              key={i}
+              onClick={async () => {
+                dispatch({
+                  type: 'setContainer',
+                  container: 1,
+                })
 
-              dispatch({
-                type: 'setToSpotBucket',
-                toSpotBucket: true,
-              })
+                dispatch({
+                  type: 'setToSpotBucket',
+                  toSpotBucket: true,
+                })
 
-              const [player, stats] = await Promise.all([
-                fetchData(e),
-                fetchStatsData(e),
-              ])
+                const [player, stats] = await Promise.all([
+                  fetchData(e),
+                  fetchStatsData(e),
+                ])
 
-              dispatch({
-                type: 'mountData',
-                stats: stats.stats,
-                ...player,
-              })
-            }}
-          >
-            {e}
-          </div>
-        ))}
+                dispatch({
+                  type: 'mountData',
+                  stats: stats.stats,
+                  ...player,
+                })
+              }}
+            >
+              {e}
+            </div>
+          ))}
+        </div>
       </List>
     </StyledAnimationFrame>
   ) : (
-    <StyledAnimationFrame height={53}>
+    <StyledAnimationFrame height={55}>
       <Preview onClick={() => setIsOpen(true)}>
         View {currentPlayers.length} players found
       </Preview>
