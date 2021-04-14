@@ -7,7 +7,7 @@ import { PLAYERNAMES } from '../fixtures/Names'
 import { COLORS, FONT_SIZES } from './theme'
 import { fetchData, fetchStatsData } from './execute'
 
-const AnimationFrame = styled(({ className, children }) => {
+const AnimationFrame = styled(({ className, children, height = 200 }) => {
   const { state } = useContext(StateStore)
 
   if (!state) {
@@ -20,7 +20,7 @@ const AnimationFrame = styled(({ className, children }) => {
 
   const props = useSpring({
     opacity: !ready || closed ? 0.9 : 1.0,
-    height: !ready || closed ? `0px` : `200px`,
+    height: !ready || closed ? `0px` : `${height}px`,
     config: {
       duration: 400,
     },
@@ -54,6 +54,22 @@ export const StyledAnimationFrame = styled(AnimationFrame)`
   }
 `
 
+const Preview = styled.div`
+  cursor: pointer;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  color: ${COLORS.grey};
+  font-size: ${FONT_SIZES.small};
+
+  &:hover {
+    background: ${COLORS.graphite};
+  }
+`
+
 const List = styled.div`
   display: flex;
   flex-direction: column;
@@ -77,6 +93,7 @@ const List = styled.div`
 
 const Catalog = () => {
   const [text, setText] = useState('')
+  const [isOpen, setIsOpen] = useState(false)
   const { state, dispatch } = useContext(StateStore)
 
   const { container } = state
@@ -97,7 +114,7 @@ const Catalog = () => {
     return null
   }
 
-  return (
+  return isOpen ? (
     <StyledAnimationFrame>
       <List>
         {currentPlayers.map((e, i) => (
@@ -130,6 +147,12 @@ const Catalog = () => {
           </div>
         ))}
       </List>
+    </StyledAnimationFrame>
+  ) : (
+    <StyledAnimationFrame height={53}>
+      <Preview onClick={() => setIsOpen(true)}>
+        View {currentPlayers.length} players found
+      </Preview>
     </StyledAnimationFrame>
   )
 }

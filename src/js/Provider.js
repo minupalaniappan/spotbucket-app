@@ -65,6 +65,12 @@ export const DataProvider = ({ children, Provider }) => {
         return Object.assign({}, prevState, {
           muted: !_muted,
         })
+      case 'closeClip':
+        return Object.assign({}, prevState, {
+          closed: true,
+          muted: true,
+          paused: true,
+        })
       case 'setError':
         return Object.assign({}, prevState, {
           error: action.error,

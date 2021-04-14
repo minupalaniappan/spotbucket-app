@@ -3,9 +3,11 @@ import Close from './close'
 import CopyLink from './copyLink'
 import styled from 'styled-components'
 import { WIDTHS } from '../theme'
+import { StateStore } from '../Store'
+import { useContext } from 'react'
 
 const Container = styled.div`
-  display: flex;
+  display: ${({ closed }) => (closed ? 'none' : 'flex')};
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
@@ -19,8 +21,15 @@ const Container = styled.div`
 `
 
 const Toolbar = () => {
+  const { state } = useContext(StateStore)
+
+  if (!state) {
+    return
+  }
+
+  const { closed } = state
   return (
-    <Container>
+    <Container {...{ closed }}>
       <CopyLink />
       <Close />
     </Container>

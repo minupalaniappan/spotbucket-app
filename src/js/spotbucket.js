@@ -59,7 +59,7 @@ const SpotBucket = () => {
     return
   }
 
-  const { container, ready, toSpotBucket } = state
+  const { container, ready, toSpotBucket, closed } = state
 
   if (container === 0) {
     return null
@@ -67,7 +67,7 @@ const SpotBucket = () => {
 
   return (
     <StyledAnimationFrame>
-      <DisplayBlock {...{ ready: ready || !toSpotBucket }}>
+      <DisplayBlock {...{ ready: (ready || !toSpotBucket) && !closed }}>
         <Dashboard />
         <Clip />
         <Player />
