@@ -2,11 +2,9 @@ import React from 'react'
 import { useContext } from 'react'
 import { StateStore } from '../Store'
 import ForwardButton from './buttons/ForwardButton'
-import { NonHoverFill } from './hover'
-import styled from 'styled-components'
-import { fetchNextPage } from '../execute'
+import { fetchPage } from '../execute'
 
-const Next = styled(({ className }) => {
+const Next = () => {
   const { dispatch, state } = useContext(StateStore)
 
   if (!state || !state.player) {
@@ -32,41 +30,41 @@ const Next = styled(({ className }) => {
   return (
     <ForwardButton
       {...{
-        className,
         disabled: !hasNextPage || !ready,
         onClick:
           !hasNextPage || !ready
             ? null
-            : async () => {
+            : () => {
                 dispatch({
                   type: 'setReady',
                   ready: false,
                 })
 
-                let plays = {}
                 if (type === 'setPage') {
-                  plays = await fetchNextPage({
+                  fetchPage({
                     playerName,
                     page,
+                  }).then((plays) => {
+                    dispatch({
+                      type,
+                      page: page + 1,
+                      ...plays,
+                    })
+
+                    dispatch({
+                      type: 'setReady',
+                      ready: true,
+                    })
+                  })
+                } else {
+                  dispatch({
+                    type: 'nextClip',
                   })
                 }
-
-                dispatch({
-                  type,
-                  page: page + 1,
-                  ...plays,
-                })
-
-                dispatch({
-                  type: 'setReady',
-                  ready: true,
-                })
               },
       }}
     />
   )
-})`
-  ${NonHoverFill}
-`
+}
 
 export default Next

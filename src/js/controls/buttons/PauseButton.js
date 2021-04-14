@@ -1,7 +1,9 @@
 import React from 'react'
+import styled from 'styled-components'
+import { DisabledHover } from '../../content/hover'
 import { COLORS } from '../../theme'
 
-const PauseButton = ({ className, onClick }) => (
+const PauseButton = styled(({ className, onClick }) => (
   <svg
     width='30'
     height='30'
@@ -26,6 +28,8 @@ const PauseButton = ({ className, onClick }) => (
       stroke='none'
     />
   </svg>
-)
+))`
+  ${DisabledHover}
+`
 
 export default PauseButton

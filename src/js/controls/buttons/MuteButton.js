@@ -1,7 +1,9 @@
 import React from 'react'
+import styled from 'styled-components'
+import { DisabledHover } from '../../content/hover'
 import { COLORS } from '../../theme'
 
-const MuteButton = ({ className, onClick }) => (
+const MuteButton = styled(({ className, onClick }) => (
   <svg
     width='24'
     height='24'
@@ -32,6 +34,8 @@ const MuteButton = ({ className, onClick }) => (
       strokeLinejoin='round'
     />
   </svg>
-)
+))`
+  ${DisabledHover}
+`
 
 export default MuteButton

@@ -14,22 +14,15 @@ export const fetchData = async (value) => {
 }
 
 export const fetchStatsData = async (value) => {
-  const data = await fetch(`${HOST}/stats?name=${value}`)
+  const data = fetch(`${HOST}/stats?name=${value}`)
     .then((d) => d.json())
     .then((e) => e)
 
   return data
 }
 
-export const fetchNextPage = async ({ playerName, page }) => {
-  const e = await fetch(
-    `${HOST}?${new URLSearchParams({
-      name: playerName,
-      page: page,
-    })}`
-  ).then((e) => e.json())
-
-  const nextPageData = await fetch(
+export const fetchPage = async ({ playerName, page }) => {
+  const data = await fetch(
     `${HOST}?${new URLSearchParams({
       name: playerName,
       page: page,
@@ -41,7 +34,7 @@ export const fetchNextPage = async ({ playerName, page }) => {
       hasNextPage,
     }))
 
-  return nextPageData
+  return data
 }
 
 const insertRoot = () => {
@@ -52,29 +45,14 @@ const insertRoot = () => {
   window.document.body.appendChild(node)
 }
 
-const install = (data) => {
+const install = () => {
   insertRoot()
 
-  render(<Frame {...data} />, document.getElementById('cherry-root'))
+  render(<Frame />, document.getElementById('cherry-root'))
 }
 
-const execute = async (value) => {
-  if (value === '') {
-    return
-  }
-
-  let data = await fetchData(value)
-
-  let { stats } = await fetchStatsData(value)
-
-  if (data && stats) {
-    data = {
-      ...data,
-      stats,
-    }
-
-    install(data)
-  }
+const execute = async () => {
+  install()
 }
 
 export { install, execute, HOST }

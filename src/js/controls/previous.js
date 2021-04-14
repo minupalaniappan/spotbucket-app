@@ -2,10 +2,9 @@ import React from 'react'
 import { useContext } from 'react'
 import { StateStore } from '../Store'
 import BackwardButton from './buttons/BackwardButton'
-import { NonHoverFill } from './hover'
-import styled from 'styled-components'
+import { fetchPage } from '../execute'
 
-const Previous = styled(({ className }) => {
+const Previous = () => {
   const { dispatch, state } = useContext(StateStore)
 
   if (!state) {
@@ -24,30 +23,29 @@ const Previous = styled(({ className }) => {
   return (
     <BackwardButton
       {...{
-        className,
-        disabled: page === 0 || !ready,
+        disabled: currentClip === 0 || !ready,
         onClick:
-          page === 0 || !ready
+          currentClip === 0 || !ready
             ? null
-            : async () => {
-                let plays = {}
+            : () => {
                 if (type === 'prevPage') {
-                  plays = await fetchNextPage({
+                  fetchPage({
                     playerName,
                     page: page - 1,
+                  }).then((plays) => {
+                    dispatch({
+                      type,
+                      plays: plays.plays,
+                    })
+                  })
+                } else {
+                  dispatch({
+                    type: 'prevClip',
                   })
                 }
-
-                dispatch({
-                  type,
-                  plays: plays.plays,
-                })
               },
       }}
     />
   )
-})`
-  ${NonHoverFill}
-`
-
+}
 export default Previous

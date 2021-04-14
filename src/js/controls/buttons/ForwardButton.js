@@ -1,7 +1,9 @@
 import React from 'react'
+import { DisabledHover } from '../../content/hover'
 import { COLORS } from '../../theme'
+import styled from 'styled-components'
 
-const ForwardButton = ({ className, onClick }) => (
+const ForwardButton = styled(({ className, onClick }) => (
   <svg
     width='12'
     height='12'
@@ -25,6 +27,8 @@ const ForwardButton = ({ className, onClick }) => (
       strokeLinejoin='round'
     />
   </svg>
-)
+))`
+  ${DisabledHover}
+`
 
 export default ForwardButton

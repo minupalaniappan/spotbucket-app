@@ -1,6 +1,5 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import { COLORS, WIDTHS } from '../theme'
 import Mute from './mute'
 import Next from './next'
 import Play from './play'
@@ -12,7 +11,11 @@ const PlayerContainer = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
-  bottom: 13px;
+  bottom: 30px;
+  background: black;
+  padding: 10px 0;
+  border-radius: 5px;
+}
 
   > div {
     flex-grow: 1;

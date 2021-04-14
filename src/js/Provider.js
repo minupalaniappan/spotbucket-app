@@ -12,12 +12,31 @@ export const DataProvider = ({ children, Provider }) => {
       page: _page,
       plays: _plays,
       paused: _paused,
+      catalogHidden: _catalogHidden,
+      toSpotBucket: _toSpotBucket,
     } = prevState
 
     switch (action.type) {
+      case 'setToSpotBucket':
+        return Object.assign({}, prevState, {
+          toSpotBucket: action.toSpotBucket,
+        })
+      case 'setReady':
+        return Object.assign({}, prevState, {
+          ready: action.ready,
+          prevDisabled: !action.ready,
+          nextDisabled: !action.ready,
+          muteDisabled: !action.ready,
+          shareDisabled: !action.ready,
+          muted: !action.ready,
+        })
       case 'pauseClip':
         return Object.assign({}, prevState, {
           paused: !_paused,
+        })
+      case 'setContainer':
+        return Object.assign({}, prevState, {
+          container: action.container,
         })
       case 'updateClipProgress':
         return Object.assign({}, prevState, {
@@ -46,23 +65,9 @@ export const DataProvider = ({ children, Provider }) => {
         return Object.assign({}, prevState, {
           muted: !_muted,
         })
-      case 'closeClip':
-        return Object.assign({}, prevState, {
-          clipClosed: !_clipClosed,
-          paused: true,
-        })
       case 'setError':
         return Object.assign({}, prevState, {
           error: action.error,
-        })
-      case 'setReady':
-        return Object.assign({}, prevState, {
-          ready: action.ready,
-          prevDisabled: !action.ready || _currentClip === 0,
-          nextDisabled: !action.ready,
-          muteDisabled: !action.ready,
-          shareDisabled: !action.ready,
-          clipCurrent: 0,
         })
       case 'setPlays':
         return Object.assign({}, prevState, {

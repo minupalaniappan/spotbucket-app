@@ -3,7 +3,7 @@ import ReactPlayer from 'react-player'
 import styled from 'styled-components'
 import { Spinner } from 'evergreen-ui'
 import { StateStore } from '../Store'
-import { fetchNextPage } from '../execute'
+import { fetchPage } from '../execute'
 
 const ReactPlayerFrame = styled.div`
   position: relative;
@@ -14,7 +14,6 @@ const ReactPlayerFrame = styled.div`
   > div:first-child {
     position: absolute !important;
     width: auto !important;
-    top: -8px;
 
     video {
       position: relative;
@@ -29,6 +28,7 @@ const LoaderFrame = styled.div`
   align-items: center;
   justify-content: center;
   height: 360px;
+  width: 100%;
 
   > div {
     display: flex;
@@ -39,6 +39,12 @@ const LoaderFrame = styled.div`
     }
   }
 `
+
+export const LoaderComponent = () => (
+  <LoaderFrame>
+    <Spinner size={24} />
+  </LoaderFrame>
+)
 
 const Clip = () => {
   const {
@@ -80,7 +86,7 @@ const Clip = () => {
             if (endOfPage) {
               if (endOfPages) {
               } else {
-                const plays = await fetchNextPage({
+                const plays = await fetchPage({
                   playerName,
                   page: page + 1,
                 })
@@ -117,6 +123,10 @@ const Clip = () => {
               ready: true,
             })
             dispatch({
+              type: 'setToSpotBucket',
+              toSpotBucket: false,
+            })
+            dispatch({
               type: 'updateClipTotal',
               clipTotal: e.getDuration(),
             })
@@ -139,7 +149,7 @@ const Clip = () => {
       </ReactPlayerFrame>
       {!ready ? (
         <LoaderFrame>
-          <Spinner size={24} />
+          <LoaderComponent />
         </LoaderFrame>
       ) : (
         ''

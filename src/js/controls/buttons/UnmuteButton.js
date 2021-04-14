@@ -1,6 +1,8 @@
 import React from 'react'
+import styled from 'styled-components'
+import { DisabledHover } from '../../content/hover'
 
-const UnmuteButton = ({ className, onClick }) => (
+const UnmuteButton = styled(({ className, onClick }) => (
   <svg
     width='24'
     height='24'
@@ -17,6 +19,8 @@ const UnmuteButton = ({ className, onClick }) => (
       strokeLinejoin='round'
     />
   </svg>
-)
+))`
+  ${DisabledHover}
+`
 
 export default UnmuteButton

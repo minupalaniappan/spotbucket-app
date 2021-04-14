@@ -1,10 +1,7 @@
-import getSelection from './listener'
 import { execute } from './execute'
 
 const app = () => {
-  getSelection((e) => {
-    execute(e.toString().trim())
-  })
+  execute()
 }
 
 window.addEventListener('load', () => {

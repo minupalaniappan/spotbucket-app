@@ -1,7 +1,9 @@
 import React from 'react'
+import styled from 'styled-components'
+import { DisabledHover } from '../../content/hover'
 import { COLORS } from '../../theme'
 
-const PlayButton = ({ className, onClick }) => (
+const PlayButton = styled(({ className, onClick }) => (
   <svg
     width='30'
     height='30'
@@ -19,6 +21,8 @@ const PlayButton = ({ className, onClick }) => (
       strokeLinejoin='round'
     />
   </svg>
-)
+))`
+  ${DisabledHover}
+`
 
 export default PlayButton

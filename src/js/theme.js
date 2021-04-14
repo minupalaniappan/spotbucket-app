@@ -4,6 +4,7 @@ import React from 'react'
 
 export const COLORS = {
   black: '#000000',
+  graphite: '#1e1e1e',
   white: '#FFFFFF',
   dusk: '#424242',
   beige: '#FFF6F6',
