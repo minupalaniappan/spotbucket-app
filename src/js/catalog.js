@@ -117,9 +117,13 @@ const Catalog = () => {
   const hidden = container !== 0
 
   useEffect(() => {
-    if (document) {
-      setText(htmlToText(document.querySelector('body').outerHTML))
-    }
+    const iid = setInterval(() => {
+      if (document) {
+        setText(htmlToText(document.querySelector('body').outerHTML))
+      }
+    }, 500)
+
+    return () => clearInterval(iid)
   }, [, document])
 
   const currentPlayers = Object.keys(PLAYERNAMES).filter((e) => {
