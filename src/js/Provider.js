@@ -101,6 +101,10 @@ export const DataProvider = ({ children, Provider }) => {
         window.open(_plays[_currentClip].videoUrl.videoUrl, '_blank')
 
         return
+      case 'setFoundPlayers':
+        return Object.assign({}, prevState, {
+          foundPlayers: action.foundPlayers,
+        })
       case 'mountData':
         return Object.assign({}, prevState, {
           hasNextPage: action.hasNextPage,
@@ -123,7 +127,9 @@ export const DataProvider = ({ children, Provider }) => {
           ),
         })
       case 'dismountData':
-        return Object.assign({}, prevState, initialState)
+        return Object.assign({}, prevState, initialState, {
+          foundPlayers: prevState.foundPlayers,
+        })
       default:
         return prevState
     }

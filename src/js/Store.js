@@ -22,6 +22,7 @@ export const initialState = {
   muteDisabled: true,
   shareDisabled: true,
   toSpotBucket: false,
+  foundPlayers: [],
 }
 
 export const StateStore = createContext(initialState)

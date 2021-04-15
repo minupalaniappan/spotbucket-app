@@ -2,11 +2,10 @@ import React, { useState, useEffect, useContext } from 'react'
 import styled from 'styled-components'
 import { useSpring, animated } from 'react-spring'
 import { StateStore } from './Store'
-import { htmlToText } from 'html-to-text'
-import { PLAYERNAMES } from '../fixtures/Names'
 import { COLORS, FONT_SIZES } from './theme'
 import { fetchData, fetchStatsData } from './execute'
 import BackwardArrowButton from './controls/buttons/BackwardArrowButton'
+import PlayerProvider from './playerProvider'
 
 const AnimationFrame = styled(({ className, children, height = 200 }) => {
   const { state } = useContext(StateStore)
@@ -55,22 +54,6 @@ export const StyledAnimationFrame = styled(AnimationFrame)`
   }
 `
 
-const Preview = styled.div`
-  cursor: pointer;
-  height: auto;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 20px;
-  color: ${COLORS.grey};
-  font-size: ${FONT_SIZES.small};
-
-  &:hover {
-    background: ${COLORS.graphite};
-  }
-`
-
 const List = styled.div`
   display: flex;
   flex-direction: column;
@@ -108,77 +91,58 @@ const List = styled.div`
 `
 
 const Catalog = () => {
-  const [text, setText] = useState('')
-  const [isOpen, setIsOpen] = useState(false)
   const { state, dispatch } = useContext(StateStore)
 
-  const { container } = state
+  const { foundPlayers: currentPlayers } = state
 
-  const hidden = container !== 0
-
-  useEffect(() => {
-    const iid = setInterval(() => {
-      if (document) {
-        setText(htmlToText(document.querySelector('body').outerHTML))
-      }
-    }, 500)
-
-    return () => clearInterval(iid)
-  }, [, document])
-
-  const currentPlayers = Object.keys(PLAYERNAMES).filter((e) => {
-    return text.includes(e)
-  })
-
-  if (currentPlayers.length === 0 || hidden) {
-    return null
-  }
-
-  return isOpen ? (
-    <StyledAnimationFrame>
-      <List>
-        <div>
-          <BackwardArrowButton onClick={() => setIsOpen(false)} />
-        </div>
-        <div>
-          {currentPlayers.map((e, i) => (
-            <div
-              key={i}
-              onClick={async () => {
+  return (
+    <PlayerProvider>
+      <StyledAnimationFrame>
+        <List>
+          <div>
+            <BackwardArrowButton
+              onClick={() =>
                 dispatch({
                   type: 'setContainer',
-                  container: 1,
+                  container: 0,
                 })
+              }
+            />
+          </div>
+          <div>
+            {currentPlayers.map((e, i) => (
+              <div
+                key={i}
+                onClick={async () => {
+                  dispatch({
+                    type: 'setContainer',
+                    container: 2,
+                  })
 
-                dispatch({
-                  type: 'setToSpotBucket',
-                  toSpotBucket: true,
-                })
+                  dispatch({
+                    type: 'setToSpotBucket',
+                    toSpotBucket: true,
+                  })
 
-                const [player, stats] = await Promise.all([
-                  fetchData(e),
-                  fetchStatsData(e),
-                ])
+                  const [player, stats] = await Promise.all([
+                    fetchData(e),
+                    fetchStatsData(e),
+                  ])
 
-                dispatch({
-                  type: 'mountData',
-                  stats: stats.stats,
-                  ...player,
-                })
-              }}
-            >
-              {e}
-            </div>
-          ))}
-        </div>
-      </List>
-    </StyledAnimationFrame>
-  ) : (
-    <StyledAnimationFrame height={55}>
-      <Preview onClick={() => setIsOpen(true)}>
-        View {currentPlayers.length} players found
-      </Preview>
-    </StyledAnimationFrame>
+                  dispatch({
+                    type: 'mountData',
+                    stats: stats.stats,
+                    ...player,
+                  })
+                }}
+              >
+                {e}
+              </div>
+            ))}
+          </div>
+        </List>
+      </StyledAnimationFrame>
+    </PlayerProvider>
   )
 }
 

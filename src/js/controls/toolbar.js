@@ -55,12 +55,12 @@ const Toolbar = () => {
             })
 
             dispatch({
-              type: 'setContainer',
-              container: 0,
+              type: 'dismountData',
             })
 
             dispatch({
-              type: 'dismountData',
+              type: 'setContainer',
+              container: 1,
             })
           }}
         />
