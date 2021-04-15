@@ -32,6 +32,10 @@ const Preview = () => {
 
   const { foundPlayers: currentPlayers } = state
 
+  if (!currentPlayers || currentPlayers.length === 0) {
+    return null
+  }
+
   return (
     <PlayerProvider>
       <StyledAnimationFrame height={55}>
