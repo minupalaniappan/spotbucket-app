@@ -7,7 +7,7 @@ export const initialState = {
   muted: true,
   paused: false,
   page: 0,
-  playerName: '',
+  player: {},
   plays: [],
   totalPages: 0,
   params: {},

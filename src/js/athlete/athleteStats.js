@@ -98,6 +98,10 @@ const AthleteStats = () => {
     player: { stats },
   } = state
 
+  if (!stats) {
+    return null
+  }
+
   return (
     <Container>
       <Row>

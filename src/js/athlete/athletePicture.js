@@ -7,7 +7,7 @@ import { WIDTHS } from '../theme'
 const PlayerPicture = styled.div`
   display: flex;
   position: relative;
-  top: 15px;
+  top: 10px;
 
   > div {
     position: relative;

@@ -22,7 +22,7 @@ const PlayerDescription = styled.div`
   text-transform: uppercase;
   color: ${COLORS.grey};
   font-weight: 400;
-  font-size: ${FONT_SIZES.medium};
+  font-size: ${FONT_SIZES.small};
 `
 
 const AthleteDescription = () => {

@@ -122,6 +122,8 @@ export const DataProvider = ({ children, Provider }) => {
             ({ videoUrl: { videoUrl } }) => videoUrl.length > 0
           ),
         })
+      case 'dismountData':
+        return Object.assign({}, prevState, initialState)
       default:
         return prevState
     }

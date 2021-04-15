@@ -10,6 +10,11 @@ const Close = styled(({ className, disabled = false }) => {
 
   const onClick = () => {
     dispatch({
+      type: 'setReady',
+      ready: false,
+    })
+
+    dispatch({
       type: 'closeClip',
     })
   }
