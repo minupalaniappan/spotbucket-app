@@ -2,12 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import styled from 'styled-components'
 import { useSpring, animated } from 'react-spring'
 import { StateStore } from './Store'
-import { htmlToText } from 'html-to-text'
-import { PLAYERNAMES } from '../fixtures/Names'
 import { COLORS, FONT_SIZES } from './theme'
-import { fetchData, fetchStatsData } from './execute'
-import BackwardArrowButton from './controls/buttons/BackwardArrowButton'
-import useInterval from 'use-interval'
 import { StyledAnimationFrame } from './catalog'
 import PlayerProvider from './playerProvider'
 
@@ -32,12 +27,12 @@ const Preview = () => {
 
   const { foundPlayers: currentPlayers } = state
 
-  if (!currentPlayers || currentPlayers.length === 0) {
-    return null
-  }
+  let component
 
-  return (
-    <PlayerProvider>
+  if (!currentPlayers || currentPlayers.length === 0) {
+    component = <div></div>
+  } else {
+    component = (
       <StyledAnimationFrame height={55}>
         <PreviewContainer
           onClick={() =>
@@ -50,8 +45,10 @@ const Preview = () => {
           View {currentPlayers.length} players found
         </PreviewContainer>
       </StyledAnimationFrame>
-    </PlayerProvider>
-  )
+    )
+  }
+
+  return <PlayerProvider>{component}</PlayerProvider>
 }
 
 export default Preview
