@@ -8,7 +8,7 @@ import { useContext } from 'react'
 import BackwardArrowButton from './buttons/BackwardArrowButton'
 
 const Container = styled.div`
-  display: ${({ closed }) => (closed ? 'none' : 'flex')};
+  display: ${({ closed }) => (closed ? "none" : "flex")};
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -27,6 +27,7 @@ const Container = styled.div`
   }
 
   > div:last-child {
+    display: flex;
     padding: ${WIDTHS.small};
 
     > svg:last-child {
@@ -34,7 +35,7 @@ const Container = styled.div`
       bottom: 3px;
     }
   }
-`
+`;
 
 const Toolbar = () => {
   const { state, dispatch } = useContext(StateStore)
